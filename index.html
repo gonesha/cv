@@ -107,6 +107,29 @@ b { color: var(--ink); font-weight: 700; }
 .rows.stack li { flex-direction: column; gap: 0; }
 .rows.stack .r { text-align: left; font-size: 14px; }
 
+.pf-tabs { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 20px; }
+.pf-tab { border: 1px solid var(--line); background: transparent; color: var(--ink); border-radius: 30px; padding: 6px 16px; font-size: 14px; font-weight: 700; }
+.pf-tab:hover { background: var(--leaf); }
+.pf-tab[aria-selected="true"] { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+.pf { display: grid; grid-template-columns: 300px 1fr; gap: 32px; padding-block: 24px 8px; }
+.pf-text { display: flex; flex-direction: column; gap: 14px; }
+.pf-text h3 { font-family: var(--display); font-weight: 500; font-size: 26px; line-height: 1.2; color: var(--ink); margin: 0; }
+.pf-text h4 { margin: 0 0 4px; font-size: 11px; text-transform: uppercase; letter-spacing: .12em; color: var(--mut); font-weight: 700; }
+.pf-text p { margin: 0; font-size: 15px; line-height: 1.55; }
+.pf-text .res li { font-size: 14.5px; }
+.frame { border: 1px solid var(--line); border-radius: 8px; overflow: hidden; background: #fff; box-shadow: 0 10px 30px rgba(91,69,41,.10); min-width: 0; }
+.fbar { display: flex; align-items: center; gap: 10px; padding: 8px 12px; background: var(--leaf); border-bottom: 1px solid var(--line); font-size: 12px; color: var(--mut); }
+.dots { display: flex; gap: 5px; }
+.dots i { width: 9px; height: 9px; border-radius: 50%; background: var(--line); display: block; }
+.fbar .addr { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-family: ui-monospace, Menlo, monospace; font-size: 11px; }
+.fbar a { color: var(--ink); font-weight: 700; text-decoration: none; white-space: nowrap; }
+.dev { display: inline-flex; border: 1px solid var(--line); border-radius: 30px; overflow: hidden; }
+.dev button { border: 0; background: transparent; color: var(--mut); padding: 2px 10px; font-size: 12px; font-weight: 700; }
+.dev button[aria-pressed="true"] { background: var(--ink); color: var(--paper); }
+.stage-wrap { background: #f3f3f3; display: flex; justify-content: center; }
+.frame iframe { display: block; width: 100%; height: 640px; border: 0; background: #fff; transition: width .25s; }
+.frame iframe.mobile { width: 390px; max-width: 100%; }
+@media (max-width: 880px) { .pf { grid-template-columns: 1fr; } .frame iframe { height: 560px; } }
 .cta { margin-top: 40px; background: var(--ink); color: var(--paper); }
 .cta .gut { display: flex; flex-wrap: wrap; align-items: center; gap: 16px 28px; padding-block: 28px; }
 .cta p { margin: 0; font-family: var(--display); font-style: italic; font-size: clamp(20px, 2.4vw, 26px); line-height: 1.3; flex: 1 1 420px; }
@@ -143,6 +166,7 @@ footer .gut { display: flex; flex-wrap: wrap; gap: 6px 20px; justify-content: sp
     <div class="who">Анна <span>Каленикова</span></div>
     <nav class="nav" aria-label="Sections">
       <a href="#exp"><span class="ru">Опыт</span><span class="en">Experience</span></a>
+      <a href="#portfolio"><span class="ru">Портфолио</span><span class="en">Portfolio</span></a>
       <a href="#skills"><span class="ru">Навыки</span><span class="en">Skills</span></a>
       <a href="#edu"><span class="ru">Образование</span><span class="en">Education</span></a>
     </nav>
@@ -239,6 +263,57 @@ footer .gut { display: flex; flex-wrap: wrap; gap: 6px 20px; justify-content: sp
   </div>
 </section>
 
+<section class="sec" id="portfolio">
+  <div class="gut">
+    <h2><span class="ru">Портфолио: живые примеры</span><span class="en">Portfolio: live examples</span></h2>
+    <p class="sub"><span class="ru">Не скриншоты, а настоящие страницы. CRM можно потрогать: перетаскивать карточки, открывать их, искать. Все данные клиентов вымышлены.</span><span class="en">Real pages, not screenshots. You can play with the CRM: drag cards, open them, search. All client data is fictional.</span></p>
+    <div class="pf-tabs" role="tablist" aria-label="Portfolio">
+      <button class="pf-tab" role="tab" id="t-crm" aria-controls="p-crm" aria-selected="true">CRM</button>
+      <button class="pf-tab" role="tab" id="t-wp" aria-controls="p-wp" aria-selected="false">Welcome pack</button>
+      <button class="pf-tab" role="tab" id="t-mail" aria-controls="p-mail" aria-selected="false"><span class="ru">Письмо клиентам</span><span class="en">Client email</span></button>
+    </div>
+
+    <div class="pf" role="tabpanel" id="p-crm" aria-labelledby="t-crm">
+      <div class="pf-text">
+        <h3><span class="ru">CRM компании, собранная с нуля</span><span class="en">A company CRM built from scratch</span></h3>
+        <div><h4><span class="ru">Задача</span><span class="en">Problem</span></h4><p><span class="ru">Данные о клиентах лежали в пяти местах: amoCRM, Notion, таблицах, Telegram и головах коллег. Каждый разговор начинался с поиска.</span><span class="en">Client data lived in five places: amoCRM, Notion, spreadsheets, Telegram and colleagues' heads. Every conversation started with a search.</span></p></div>
+        <div><h4><span class="ru">Что сделала</span><span class="en">What I did</span></h4><ul class="res"><li><span class="ru">Три воронки под три разные задачи: аналитика, рекрутинг, клуб.</span><span class="en">Three pipelines for three different jobs: analytics, recruitment, club.</span></li><li><span class="ru">~50 скриптов на Python: импорт, чистка дублей, обогащение.</span><span class="en">~50 Python scripts: import, deduplication, enrichment.</span></li><li><span class="ru">Утренний дайджест задач и «молчащих» клиентов в Telegram.</span><span class="en">A morning Telegram digest of tasks and silent clients.</span></li></ul></div>
+        <div><h4><span class="ru">Результат</span><span class="en">Result</span></h4><p><span class="ru"><b>3000+ карточек</b> в одной системе, нулевая стоимость владения, видно, кто из клиентов замолчал.</span><span class="en"><b>3,000+ records</b> in one system at zero cost, and I can see which clients went quiet.</span></p></div>
+      </div>
+      <div class="frame">
+        <div class="fbar"><span class="dots"><i></i><i></i><i></i></span><span class="addr">crm.local / kanban</span><a href="portfolio/crm.html" target="_blank" rel="noopener"><span class="ru">Открыть ↗</span><span class="en">Open ↗</span></a></div>
+        <iframe src="portfolio/crm.html" title="CRM demo" loading="lazy"></iframe>
+      </div>
+    </div>
+
+    <div class="pf" role="tabpanel" id="p-wp" aria-labelledby="t-wp" hidden>
+      <div class="pf-text">
+        <h3><span class="ru">Welcome pack закрытого HR-сообщества</span><span class="en">Welcome pack for a private HR community</span></h3>
+        <div><h4><span class="ru">Задача</span><span class="en">Problem</span></h4><p><span class="ru">Новые участники терялись на входе: путали почты и каналы, писали «не могу войти». В дни эфиров — по 20–30 обращений.</span><span class="en">New members got lost at the door: wrong emails, wrong channels, "I can't log in". On live-session days, 20–30 tickets.</span></p></div>
+        <div><h4><span class="ru">Что сделала</span><span class="en">What I did</span></h4><ul class="res"><li><span class="ru">Написала и сверстала страницу «первые 10 минут»: каналы, маршрут, правила, команда, FAQ.</span><span class="en">Wrote and built a "first 10 minutes" page: channels, route, rules, team, FAQ.</span></li><li><span class="ru">Добавила бота, который ведёт по типовым ситуациям.</span><span class="en">Added a bot that walks people through common cases.</span></li></ul></div>
+        <div><h4><span class="ru">Результат</span><span class="en">Result</span></h4><p><span class="ru">Обращений в дни эфиров <b>3–5 вместо 20–30</b>, сообщество выросло <b>со 150 до 500+</b> без новой нагрузки на команду.</span><span class="en"><b>3–5 tickets instead of 20–30</b> on live-session days; the community grew <b>from 150 to 500+</b> with no extra load.</span></p></div>
+      </div>
+      <div class="frame">
+        <div class="fbar"><span class="dots"><i></i><i></i><i></i></span><span class="addr">newhr pro / welcome-pack</span><a href="portfolio/welcome-pack.html" target="_blank" rel="noopener"><span class="ru">Открыть ↗</span><span class="en">Open ↗</span></a></div>
+        <iframe data-src="portfolio/welcome-pack.html" title="Welcome pack" loading="lazy"></iframe>
+      </div>
+    </div>
+
+    <div class="pf" role="tabpanel" id="p-mail" aria-labelledby="t-mail" hidden>
+      <div class="pf-text">
+        <h3><span class="ru">Письмо клиентам после сбоя сервиса</span><span class="en">Client email after a service outage</span></h3>
+        <div><h4><span class="ru">Задача</span><span class="en">Problem</span></h4><p><span class="ru">Дата-центр внезапно отключил оборудование, сервис зарплатной аналитики лёг. Нужно было сохранить доверие подписчиков.</span><span class="en">A data centre suddenly shut down, and the salary analytics service went down. We had to keep subscribers' trust.</span></p></div>
+        <div><h4><span class="ru">Что сделала</span><span class="en">What I did</span></h4><ul class="res"><li><span class="ru">Текст по структуре: что случилось, данные целы, что меняем, подарок.</span><span class="en">Copy structured as: what happened, data is safe, what we're changing, a gift.</span></li><li><span class="ru">Сама сверстала письмо таблицами с инлайн-стилями, чтобы оно не разваливалось в Outlook и на телефоне.</span><span class="en">Hand-coded the email in tables with inline styles so it holds up in Outlook and on phones.</span></li></ul></div>
+        <div><h4><span class="ru">Посмотрите</span><span class="en">Try it</span></h4><p><span class="ru">Переключите ширину, чтобы увидеть мобильную версию:</span><span class="en">Switch the width to see the mobile version:</span></p></div>
+      </div>
+      <div class="frame">
+        <div class="fbar"><span class="dots"><i></i><i></i><i></i></span><span class="dev" role="group" aria-label="Width"><button type="button" data-w="desk" aria-pressed="true">Desktop</button><button type="button" data-w="mob" aria-pressed="false">Mobile</button></span><span class="addr"></span><a href="portfolio/email.html" target="_blank" rel="noopener"><span class="ru">Открыть ↗</span><span class="en">Open ↗</span></a></div>
+        <div class="stage-wrap"><iframe id="mailFrame" data-src="portfolio/email.html" title="Client email" loading="lazy"></iframe></div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <section class="sec" id="skills">
   <div class="gut">
     <h2><span class="ru">Навыки и инструменты</span><span class="en">Skills and tools</span></h2>
@@ -295,6 +370,22 @@ footer .gut { display: flex; flex-wrap: wrap; gap: 6px 20px; justify-content: sp
     try { localStorage.setItem('ak-cases-lang', l); } catch (e) {}
   }
   document.querySelectorAll('.lang button').forEach(function (b) { b.addEventListener('click', function () { setLang(b.dataset.l); }); });
+  var tabs = document.querySelectorAll('.pf-tab');
+  tabs.forEach(function (t) {
+    t.addEventListener('click', function () {
+      tabs.forEach(function (x) {
+        var on = x === t; x.setAttribute('aria-selected', String(on));
+        var p = document.getElementById(x.getAttribute('aria-controls')); p.hidden = !on;
+        var f = p.querySelector('iframe[data-src]'); if (on && f && !f.getAttribute('src')) f.setAttribute('src', f.dataset.src);
+      });
+    });
+  });
+  document.querySelectorAll('.dev button').forEach(function (b) {
+    b.addEventListener('click', function () {
+      document.querySelectorAll('.dev button').forEach(function (x) { x.setAttribute('aria-pressed', String(x === b)); });
+      document.getElementById('mailFrame').classList.toggle('mobile', b.dataset.w === 'mob');
+    });
+  });
   var saved = null;
   try { saved = localStorage.getItem('ak-cases-lang'); } catch (e) {}
   setLang(saved === 'en' ? 'en' : 'ru');

@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>NEWHR Pro — Welcome Pack (пример)</title>
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          'newhr-blue':   '#3964D4',
+          'newhr-dark':   '#232325',
+          'newhr-light':  '#F2F7FC',
+          'newhr-muted':  '#C7D2E9',
+          'newhr-gray':   '#676C79',
+          'newhr-cream':  '#FAF9F5',
+          'newhr-green':  '#62C584',
+          'newhr-coral':  '#F95D51',
+          'newhr-salmon': '#FF8562',
+          'newhr-footer': '#222325',
+          'newhr-footer-text': '#9DA8C8',
+        },
+        fontFamily: {
+          'display': ['Raleway', 'sans-serif'],
+          'mono':    ['IBM Plex Mono', 'monospace'],
+        },
+      },
+    },
+  };
+</script>
+<style>
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Raleway', sans-serif; }
+  details > summary { cursor: pointer; list-style: none; }
+  details > summary::-webkit-details-marker { display: none; }
+  details[open] .chev { transform: rotate(180deg); }
+  .chev { transition: transform .2s ease; }
+  .tile { transition: transform .15s ease, box-shadow .15s ease; }
+  .tile:hover { transform: translateY(-2px); box-shadow: 0 12px 28px -10px rgba(35,35,37,.18); }
+  .rule-card { transition: border-color .15s ease, background-color .15s ease; }
+  .rule-card[open] { border-color: #3964D4; background: #F2F7FC; }
+  .anchor-offset { scroll-margin-top: 80px; }
+  .link-inline { color: #3964D4; text-decoration: underline; text-underline-offset: 2px; }
+  .link-inline:hover { color: #2347a8; }
+  .link-mono { color: #3964D4; }
+  .link-mono:hover { text-decoration: underline; text-underline-offset: 2px; }
+  details summary:focus-visible,
+  button:focus-visible,
+  a:focus-visible { outline: 2px solid #3964D4; outline-offset: 2px; border-radius: 4px; }
+</style>
+</head>
+<body class="bg-newhr-cream text-newhr-dark"><div style="background:#fff7e6;color:#8a5a00;font:12px/1.4 Raleway,sans-serif;padding:7px 16px;text-align:center;border-bottom:1px solid #f3dfb5">Пример из моего портфолио: welcome-pack закрытого HR-сообщества, который я написала и сверстала. Контакты коллег скрыты.</div>
+
+<!-- ==================== NAVBAR ==================== -->
+<nav class="bg-newhr-dark px-5 md:px-8 py-3 flex items-center justify-between sticky top-0 z-40 shadow-md">
+  <a href="#top" class="flex items-center gap-3">
+    <img src="https://static.tildacdn.com/tild3561-3536-4066-b533-383730663162/logo_newhr-03.svg" alt="NEWHR" class="h-7 md:h-8" />
+    <span class="hidden md:inline text-white/60 font-mono text-xs uppercase tracking-widest">/ Pro</span>
+  </a>
+  <div class="hidden md:flex items-center gap-6 text-white/80 text-sm">
+    <a href="#channels" class="hover:text-white transition-colors">Каналы</a>
+    <a href="#path" class="hover:text-white transition-colors">Маршрут</a>
+    <a href="#rules" class="hover:text-white transition-colors">Правила</a>
+    <a href="#team" class="hover:text-white transition-colors">Команда</a>
+    <a href="#faq" class="hover:text-white transition-colors">FAQ</a>
+  </div>
+  <a href="#path"
+     class="bg-newhr-blue hover:bg-blue-600 text-white text-xs md:text-sm font-semibold px-4 py-2 rounded-lg transition-colors">
+    Маршрут первых дней
+  </a>
+</nav>
+
+<!-- ==================== HERO ==================== -->
+<header id="top" class="bg-newhr-dark text-white px-5 md:px-8 pt-14 pb-20 md:pt-20 md:pb-28">
+  <div class="max-w-5xl mx-auto">
+    <div class="inline-block font-mono text-sm uppercase tracking-widest text-newhr-muted/80 border border-newhr-muted/30 rounded-full px-3 py-1 mb-6">
+      Welcome Pack
+    </div>
+    <h1 class="font-display font-bold text-4xl md:text-6xl leading-tight mb-6">
+      Привет!<br/>
+      Ты в <span class="text-newhr-blue">NEWHR Pro</span> 🫂
+    </h1>
+    <p class="text-lg md:text-xl text-white/80 leading-relaxed max-w-3xl mb-8">
+      Закрытое комьюнити in-house HR, которые работают с IT. Сотни участников,
+      пишущих про реальные кейсы — без нанимающих, без сторонних рекрутеров, без случайных кандидатов. Только свои.
+    </p>
+    <p class="text-base md:text-lg text-white/60 leading-relaxed max-w-3xl">
+      Эта страница — твой набор подсказок, чтобы понять, что мы делаем и зачем,
+      где общаемся и храним полезные материалы, и к кому идти с вопросами и идеями.
+      Она займёт у тебя буквально 10 минут!
+    </p>
+
+    <div class="mt-10 flex flex-col sm:flex-row gap-3 sm:gap-4">
+      <a href="#channels"
+         class="bg-newhr-blue hover:bg-blue-600 text-white font-semibold px-6 py-3 rounded-lg text-center transition-colors">
+        Куда зайти первым делом →
+      </a>
+      <a href="#rules"
+         class="border border-white/30 hover:border-white text-white font-semibold px-6 py-3 rounded-lg text-center transition-colors">
+        Прочитать правила
+      </a>
+    </div>
+  </div>
+</header>
+
+<!-- ==================== VALUE PROPS ==================== -->
+<section class="px-5 md:px-8 py-16 md:py-20 bg-newhr-cream">
+  <div class="max-w-5xl mx-auto">
+    <h2 class="font-display font-bold text-3xl md:text-4xl mb-10 max-w-3xl">
+      Что ты получишь в сообществе:
+    </h2>
+
+    <div class="grid md:grid-cols-3 gap-5">
+      <div class="bg-white rounded-2xl p-7 border border-newhr-muted/30 tile">
+        <div class="w-10 h-10 rounded-lg bg-newhr-light flex items-center justify-center mb-5">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#3964D4" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        </div>
+        <h3 class="font-display font-bold text-xl mb-3">Только проверенные участники</h3>
+        <p class="text-newhr-gray leading-relaxed">
+          Внутри — только in-house HR из IT-команд. Заявки смотрят вручную, не алгоритмом.
+          Когда тебе отвечают в болталке — у собеседника твой контекст, а не «общий рынок».
+        </p>
+      </div>
+
+      <div class="bg-white rounded-2xl p-7 border border-newhr-muted/30 tile">
+        <div class="w-10 h-10 rounded-lg bg-newhr-light flex items-center justify-center mb-5">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#3964D4" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+        </div>
+        <h3 class="font-display font-bold text-xl mb-3">Закрытые эфиры</h3>
+        <p class="text-newhr-gray leading-relaxed">
+          Регулярные встречи с in-house экспертами. Говорят откровенно — то, что
+          не скажут на открытой конференции. Записи доступны только участникам.
+        </p>
+      </div>
+
+      <div class="bg-white rounded-2xl p-7 border border-newhr-muted/30 tile">
+        <div class="w-10 h-10 rounded-lg bg-newhr-light flex items-center justify-center mb-5">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#3964D4" stroke-width="2"><path d="M4 19.5v-15a2 2 0 0 1 2-2h13.5a.5.5 0 0 1 .5.5v18a.5.5 0 0 1-.5.5H6a2 2 0 0 1-2-2zM6 2.5v17M20 17.5H6"/></svg>
+        </div>
+        <h3 class="font-display font-bold text-xl mb-3">База знаний с транскрипциями</h3>
+        <p class="text-newhr-gray leading-relaxed">
+          Не успел на эфир — посмотришь запись или прочитаешь транскрипт. У каждого эфира есть полная
+          расшифровка: поиск по тексту работает быстрее, чем перематывать часовое видео.
+          Архив разложен по темам.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== CHANNELS ==================== -->
+<section id="channels" class="anchor-offset px-5 md:px-8 py-16 md:py-20 bg-newhr-light">
+  <div class="max-w-5xl mx-auto">
+    <div class="font-mono text-xs uppercase tracking-widest text-newhr-blue mb-3">Каналы Pro</div>
+    <h2 class="font-display font-bold text-3xl md:text-4xl mb-10">Где мы общаемся:</h2>
+
+    <div class="grid md:grid-cols-2 gap-5">
+
+      <!-- TG канал -->
+      <div class="bg-white rounded-2xl p-7 border border-newhr-muted/30 tile">
+        <div class="flex items-start justify-between mb-4">
+          <div class="font-mono text-xs uppercase tracking-widest text-newhr-blue">01</div>
+        </div>
+        <h3 class="font-display font-bold text-xl mb-3">Telegram-канал</h3>
+        <p class="text-newhr-gray leading-relaxed text-sm">
+          Тут ты найдёшь анонсы эфиров, материалы и важные апдейты от команды. Канал для чтения —
+          обсуждения и вопросы идут в болталке.
+        </p>
+      </div>
+
+      <!-- TG болталка -->
+      <div class="bg-white rounded-2xl p-7 border border-newhr-muted/30 tile">
+        <div class="flex items-start justify-between mb-4">
+          <div class="font-mono text-xs uppercase tracking-widest text-newhr-blue">02</div>
+        </div>
+        <h3 class="font-display font-bold text-xl mb-3">Болталка</h3>
+        <p class="text-newhr-gray leading-relaxed text-sm">
+          Тут ты можешь задать вопрос, поделиться кейсом, поспорить или попросить совет — это общий
+          чат сообщества. Первое, что стоит сделать — представиться в Intro-топике (см. маршрут первых дней ниже).
+        </p>
+      </div>
+
+      <!-- Events платформа -->
+      <div class="bg-white rounded-2xl p-7 border border-newhr-muted/30 tile md:col-span-2">
+        <div class="flex items-start justify-between mb-4">
+          <div class="font-mono text-xs uppercase tracking-widest text-newhr-blue">03</div>
+          <a href="https://events.newhr.org" target="_blank" rel="noopener"
+             class="font-mono text-xs text-newhr-gray hover:text-newhr-blue transition-colors">Открыть →</a>
+        </div>
+        <h3 class="font-display font-bold text-xl mb-2">Платформа NEWHR Events</h3>
+        <p class="text-newhr-gray leading-relaxed text-sm mb-3">
+          Тут ты найдёшь всё по эфирам: записи, транскрипции, материалы, расписание ближайших встреч.
+          Открывается по адресу
+          <a href="https://events.newhr.org" target="_blank" rel="noopener" class="link-inline">events.newhr.org</a>.
+          Это не «сайт NEWHR» — это твоя приватная база. Доступ привязан к твоему аккаунту, поделиться записями нельзя.
+        </p>
+        <p class="text-newhr-gray leading-relaxed text-sm mb-4">
+          Если ты в РФ и основной домен не открывается — есть зеркало:
+          <a href="https://events.newhr.ru" target="_blank" rel="noopener" class="link-inline">events.newhr.ru</a>.
+          Логин-пароль тот же.
+        </p>
+        <div class="flex flex-wrap gap-2 mt-4">
+          <span class="border border-newhr-muted rounded-md px-3 py-1 font-mono text-xs uppercase tracking-wider text-newhr-dark">Записи</span>
+          <span class="border border-newhr-muted rounded-md px-3 py-1 font-mono text-xs uppercase tracking-wider text-newhr-dark">Транскрипции</span>
+          <span class="border border-newhr-muted rounded-md px-3 py-1 font-mono text-xs uppercase tracking-wider text-newhr-dark">Расписание</span>
+          <span class="border border-newhr-muted rounded-md px-3 py-1 font-mono text-xs uppercase tracking-wider text-newhr-dark">Материалы</span>
+        </div>
+      </div>
+
+      <!-- Команда -->
+      <div class="bg-newhr-dark text-white rounded-2xl p-7 md:col-span-2">
+        <div class="flex items-start justify-between mb-4">
+          <div class="font-mono text-xs uppercase tracking-widest text-newhr-muted">04</div>
+        </div>
+        <h3 class="font-display font-bold text-xl mb-3">Команда</h3>
+        <p class="text-white/70 leading-relaxed text-sm">
+          Тут ты можешь написать команде напрямую — Ане в Telegram
+          <a href="https://t.me/newhraccount" target="_blank" rel="noopener" class="text-newhr-blue underline">@newhraccount</a>
+          или на общую почту
+          <a href="mailto:contact@new.hr" class="text-newhr-blue underline">contact@new.hr</a>.
+          Сюда пишут, если: сменил работу, нужна смена доступа, есть деликатный вопрос,
+          хочешь сообщить о нарушении правил конфиденциально. Письма видят основательница и Аня.
+        </p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ==================== RECOMMENDED PATH ==================== -->
+<section id="path" class="anchor-offset px-5 md:px-8 py-16 md:py-20 bg-newhr-light">
+  <div class="max-w-5xl mx-auto">
+    <div class="font-mono text-xs uppercase tracking-widest text-newhr-blue mb-3">Рекомендуемая последовательность</div>
+    <h2 class="font-display font-bold text-3xl md:text-4xl mb-3">Маршрут первых дней:</h2>
+    <p class="text-newhr-gray text-lg max-w-2xl mb-10">
+      Собрали всё самое важное, чтобы ты мог лучше освоиться в сообществе!
+    </p>
+
+    <div class="space-y-4">
+
+      <!-- Step 1 -->
+      <div class="bg-white rounded-2xl p-6 md:p-7 border border-newhr-muted/30 tile">
+        <div class="flex flex-col md:flex-row md:items-start gap-5">
+          <div class="font-display font-bold text-3xl text-newhr-blue/30 shrink-0 md:w-12">01</div>
+          <div class="flex-1">
+            <h3 class="font-display font-bold text-xl mb-2">Подпишись на Telegram-канал</h3>
+            <p class="text-newhr-gray leading-relaxed text-sm">
+              Это основной источник анонсов эфиров и апдейтов. Без подписки — пропустишь то, ради чего и пришёл.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 2 -->
+      <div class="bg-white rounded-2xl p-6 md:p-7 border border-newhr-muted/30 tile">
+        <div class="flex flex-col md:flex-row md:items-start gap-5">
+          <div class="font-display font-bold text-3xl text-newhr-blue/30 shrink-0 md:w-12">02</div>
+          <div class="flex-1">
+            <h3 class="font-display font-bold text-xl mb-2">Зайди в болталку</h3>
+            <p class="text-newhr-gray leading-relaxed text-sm">
+              Без болталки тебя в Pro фактически нет — это место, где живут разговоры. Просто зайди, осмотрись
+              и почитай последние сообщения, чтобы поймать темп и тон.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 3 -->
+      <div class="bg-white rounded-2xl p-6 md:p-7 border border-newhr-muted/30 tile">
+        <div class="flex flex-col md:flex-row md:items-start gap-5">
+          <div class="font-display font-bold text-3xl text-newhr-blue/30 shrink-0 md:w-12">03</div>
+          <div class="flex-1">
+            <h3 class="font-display font-bold text-xl mb-2">Представься в Intro-топик</h3>
+            <p class="text-newhr-gray leading-relaxed text-sm mb-3">
+              Найди в болталке закреплённый Intro-топик. Шаблон: кто ты, где работаешь (можно без названия
+              компании), за чем пришёл в Pro, чем готов делиться.
+            </p>
+            <p class="text-newhr-gray text-xs italic">
+              Когда участники видят, кто ты и в чём силён, проще понять, с каким вопросом к тебе можно прийти —
+              и проще самому встроиться в разговор.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 4 -->
+      <div class="bg-white rounded-2xl p-6 md:p-7 border border-newhr-muted/30 tile">
+        <div class="flex flex-col md:flex-row md:items-start gap-5">
+          <div class="font-display font-bold text-3xl text-newhr-blue/30 shrink-0 md:w-12">04</div>
+          <div class="flex-1">
+            <h3 class="font-display font-bold text-xl mb-2">Залогинься на платформе NEWHR Events</h3>
+            <p class="text-newhr-gray leading-relaxed text-sm">
+              Проверь, что доступ работает. Доступ привязан к email, под которым тебя приняли. Если ты в РФ и
+              сайт не открывается — пробуй
+              <a href="https://events.newhr.ru" target="_blank" rel="noopener" class="link-inline">events.newhr.ru</a>.
+            </p>
+          </div>
+          <a href="https://events.newhr.org" target="_blank" rel="noopener"
+             class="shrink-0 inline-flex items-center justify-center bg-newhr-blue hover:bg-blue-600 text-white text-sm font-semibold px-5 py-2.5 rounded-lg transition-colors">
+            Открыть платформу →
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ==================== RULES ==================== -->
+<section id="rules" class="anchor-offset px-5 md:px-8 py-16 md:py-20 bg-newhr-cream">
+  <div class="max-w-5xl mx-auto">
+    <div class="font-mono text-xs uppercase tracking-widest text-newhr-gray mb-3">4 правила, на которых всё стоит</div>
+    <h2 class="font-display font-bold text-3xl md:text-4xl mb-3">Правила:</h2>
+    <p class="text-newhr-gray text-lg max-w-2xl mb-10">
+      Здесь ты найдёшь наши постулаты, чтобы сделать сообщество уютным и безопасным.
+    </p>
+
+    <div class="space-y-3">
+
+      <!-- Rule 1 -->
+      <details class="rule-card bg-white border border-newhr-muted/30 rounded-2xl p-6 group">
+        <summary class="flex items-start justify-between gap-4">
+          <span class="flex items-start gap-4">
+            <span class="w-9 h-9 rounded-full bg-newhr-blue text-white inline-flex items-center justify-center font-bold font-mono shrink-0">1</span>
+            <span class="inline-block">
+              <span class="font-display font-bold text-lg md:text-xl block">Правило далёкой галактики</span>
+              <span class="text-newhr-gray text-sm mt-1 block">Делимся кейсами — да. Называем компании — нет.</span>
+            </span>
+          </span>
+          <svg class="chev shrink-0 mt-1" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#676C79" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+        </summary>
+        <div class="mt-5 pl-0 md:pl-14 text-newhr-gray leading-relaxed space-y-3">
+          <p>
+            Когда рассказываешь кейс — анонимизируй компанию. «У нас» / «в одной FAANG-компании» / «в продуктовой
+            компании на 500 человек» — да. «В X.Inc вот так» — нет.
+          </p>
+          <p>
+            <strong class="text-newhr-dark">Зачем:</strong> некоторые слова и кейсы могут задеть конкретных людей,
+            поэтому анонимизация в данном случае — это забота о коллегах и о себе, а не формальность.
+          </p>
+        </div>
+      </details>
+
+      <!-- Rule 2 -->
+      <details class="rule-card bg-white border border-newhr-muted/30 rounded-2xl p-6 group">
+        <summary class="flex items-start justify-between gap-4">
+          <span class="flex items-start gap-4">
+            <span class="w-9 h-9 rounded-full bg-newhr-blue text-white inline-flex items-center justify-center font-bold font-mono shrink-0">2</span>
+            <span class="inline-block">
+              <span class="font-display font-bold text-lg md:text-xl block">Болталка ≠ Twitter</span>
+              <span class="text-newhr-gray text-sm mt-1 block">Помощь и обмен опытом. Без токсичности и публичных разборок.</span>
+            </span>
+          </span>
+          <svg class="chev shrink-0 mt-1" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#676C79" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+        </summary>
+        <div class="mt-5 pl-0 md:pl-14 text-newhr-gray leading-relaxed space-y-3">
+          <p>
+            Спорить — нормально. Не соглашаться — нормально. Высмеивать чей-то вопрос, переходить на личности,
+            публично «учить» — нет. Если вопрос тебе не близок, лучше пройти мимо, чем ответить грубо.
+          </p>
+          <p>
+            <strong class="text-newhr-dark">Зачем:</strong> в болталке часто пишут про болезненные темы, если на
+            каждый «глупый» вопрос будет насмешка — люди перестанут спрашивать, и комьюнити умрёт.
+          </p>
+        </div>
+      </details>
+
+      <!-- Rule 3 -->
+      <details class="rule-card bg-white border border-newhr-muted/30 rounded-2xl p-6 group">
+        <summary class="flex items-start justify-between gap-4">
+          <span class="flex items-start gap-4">
+            <span class="w-9 h-9 rounded-full bg-newhr-blue text-white inline-flex items-center justify-center font-bold font-mono shrink-0">3</span>
+            <span class="inline-block">
+              <span class="font-display font-bold text-lg md:text-xl block">Записи и материалы всегда остаются в сообществе</span>
+              <span class="text-newhr-gray text-sm mt-1 block">Не пересылай записи эфиров и транскрипции, лучше пригласи коллегу.</span>
+            </span>
+          </span>
+          <svg class="chev shrink-0 mt-1" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#676C79" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+        </summary>
+        <div class="mt-5 pl-0 md:pl-14 text-newhr-gray leading-relaxed space-y-3">
+          <p>
+            Записи, транскрипции, скриншоты из чата, конкретные истории — всё это остаётся в Pro.
+            Можно пересказать своими словами своему руководителю или коллеге, нельзя — переслать файл,
+            ссылку или цитату с авторством.
+          </p>
+          <p>
+            <strong class="text-newhr-dark">Зачем:</strong> чтобы внутри Pro сохранялась атмосфера, в которой можно
+            говорить открыто и безопасно.
+          </p>
+        </div>
+      </details>
+
+      <!-- Rule 4 -->
+      <details class="rule-card bg-white border border-newhr-muted/30 rounded-2xl p-6 group">
+        <summary class="flex items-start justify-between gap-4">
+          <span class="flex items-start gap-4">
+            <span class="w-9 h-9 rounded-full bg-newhr-blue text-white inline-flex items-center justify-center font-bold font-mono shrink-0">4</span>
+            <span class="inline-block">
+              <span class="font-display font-bold text-lg md:text-xl block">Сменил работу — скажи нам</span>
+              <span class="text-newhr-gray text-sm mt-1 block">Pro — для in-house HR в IT. Если ушёл в агентство или сменил сферу — обсудим.</span>
+            </span>
+          </span>
+          <svg class="chev shrink-0 mt-1" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#676C79" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+        </summary>
+        <div class="mt-5 pl-0 md:pl-14 text-newhr-gray leading-relaxed space-y-3">
+          <p>
+            Ушёл в агентство, перешёл в кадровое, занялся фрилансом, ушёл из IT — напиши Ане.
+            Это не значит автоматически «тебя удалят» — это значит «давай обсудим, как тебе быть в Pro,
+            чтобы это было ок и для тебя, и для других».
+          </p>
+          <p>
+            <strong class="text-newhr-dark">Зачем:</strong> состав Pro — это и есть ценность. Если в чат
+            in-house HR незаметно проникнут продажники или агентства — обсуждения изменятся, и
+            смысл потеряется. Прозрачность тут вместо подозрений.
+          </p>
+          <p class="text-sm">
+            <span class="font-mono text-newhr-blue uppercase tracking-wider">Контакт:</span>
+            пиши Ане — <a href="https://t.me/newhraccount" target="_blank" rel="noopener" class="link-inline">@newhraccount</a>
+            или <a href="mailto:contact@new.hr" class="link-inline">contact@new.hr</a>.
+          </p>
+        </div>
+      </details>
+
+    </div>
+  </div>
+</section>
+
+<!-- ==================== TEAM ==================== -->
+<section id="team" class="anchor-offset px-5 md:px-8 py-16 md:py-20 bg-newhr-cream">
+  <div class="max-w-5xl mx-auto">
+    <div class="font-mono text-xs uppercase tracking-widest text-newhr-gray mb-3">Кто за этим стоит</div>
+    <h2 class="font-display font-bold text-3xl md:text-4xl mb-3">Команда:</h2>
+    <p class="text-newhr-gray text-lg max-w-2xl mb-10">
+      Pro — это не сервис от безличной компании. Это команда, которой важно, как ты здесь себя чувствуешь.
+    </p>
+
+    <div class="grid md:grid-cols-2 gap-5">
+
+      <div class="bg-white rounded-2xl p-7 border border-newhr-muted/30 tile">
+        <div class="w-14 h-14 rounded-full mb-5 bg-newhr-light text-newhr-blue font-display font-bold flex items-center justify-center" aria-hidden="true">ОС</div>
+        <h3 class="font-display font-bold text-xl mb-1">Основательница сообщества</h3>
+        <div class="font-mono text-xs uppercase tracking-widest text-newhr-blue mb-3">Основатель NEWHR</div>
+        <p class="text-newhr-gray text-sm leading-relaxed mb-4">
+          Создатель Pro и главный генератор идей для контента. К ней с мыслями про стратегию, форматы,
+          коммерческие интеграции, партнёрства, эфиры. Если хочешь выступить или предложить тему,
+          она тебя всегда ждёт.
+        </p>
+        <div class="space-y-1 font-mono text-xs">
+          <div class="text-newhr-gray">Telegram: <a href="#" target="_blank" rel="noopener" class="link-mono">@founder</a></div>
+          <div class="text-newhr-gray">Email: <a href="mailto:contact@new.hr" class="link-mono">contact@new.hr</a></div>
+        </div>
+      </div>
+
+      <div class="bg-white rounded-2xl p-7 border border-newhr-muted/30 tile">
+        <img src="avatars/anya.jpg" alt="Аня Каленикова" class="w-14 h-14 rounded-full object-cover mb-5" />
+        <h3 class="font-display font-bold text-xl mb-1">Аня Каленикова</h3>
+        <div class="font-mono text-xs uppercase tracking-widest text-newhr-blue mb-3">Account manager Pro</div>
+        <p class="text-newhr-gray text-sm leading-relaxed mb-4">
+          Твой проводник по всем вопросам. Принимает заявки, разбирает доступы, помогает с навигацией,
+          модерирует, решает спорные ситуации. Пиши Ане при любых сомнениях или неполадках.
+        </p>
+        <div class="space-y-1 font-mono text-xs">
+          <div class="text-newhr-gray">Telegram: <a href="https://t.me/newhraccount" target="_blank" rel="noopener" class="link-mono">@newhraccount</a></div>
+          <div class="text-newhr-gray">Email: <a href="mailto:contact@new.hr" class="link-mono">contact@new.hr</a></div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="mt-8 p-5 bg-white rounded-2xl border border-newhr-muted/30">
+      <p class="text-sm text-newhr-gray leading-relaxed">
+        <strong class="text-newhr-dark font-display">Не знаешь, к кому обратиться?</strong>
+        Пиши Ане или на <a href="mailto:contact@new.hr" class="link-inline">contact@new.hr</a>.
+        Если что — она перенаправит. Универсальный ответ: «когда сомневаешься — Аня».
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== FAQ ==================== -->
+<section id="faq" class="anchor-offset px-5 md:px-8 py-16 md:py-20 bg-newhr-light">
+  <div class="max-w-3xl mx-auto">
+    <div class="font-mono text-xs uppercase tracking-widest text-newhr-blue mb-3">Часто спрашивают</div>
+    <h2 class="font-display font-bold text-3xl md:text-4xl mb-10">FAQ:</h2>
+
+    <div class="space-y-3">
+
+      <details class="bg-white border border-newhr-muted/30 rounded-2xl p-6">
+        <summary class="flex items-center justify-between gap-4">
+          <span class="font-display font-semibold text-lg">Можно ли пригласить коллегу?</span>
+          <svg class="chev shrink-0" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#676C79" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+        </summary>
+        <p class="mt-4 text-newhr-gray leading-relaxed">
+          Конечно. Поделись с коллегой <a href="https://events.newhr.org/club" target="_blank" rel="noopener" class="text-newhr-blue underline underline-offset-2 hover:no-underline">ссылкой на форму участника</a>.
+          Если коллега из России, лучше отправить <a href="https://events.newhr.ru/club" target="_blank" rel="noopener" class="text-newhr-blue underline underline-offset-2 hover:no-underline">эту страницу</a>.
+          Рекомендация от тебя ускоряет рассмотрение, но не отменяет проверку.
+        </p>
+      </details>
+
+      <details class="bg-white border border-newhr-muted/30 rounded-2xl p-6">
+        <summary class="flex items-center justify-between gap-4">
+          <span class="font-display font-semibold text-lg">Я пропустил эфир — как посмотреть запись?</span>
+          <svg class="chev shrink-0" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#676C79" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+        </summary>
+        <p class="mt-4 text-newhr-gray leading-relaxed">
+          Все записи — на платформе <a href="https://events.newhr.org" target="_blank" rel="noopener" class="link-inline">Events</a>
+          (или на <a href="https://events.newhr.ru" target="_blank" rel="noopener" class="link-inline">Events РФ</a>).
+          Залогинься под своим email из формы участника — получишь доступ не только к записи, но и к транскрипции.
+        </p>
+      </details>
+
+      <details class="bg-white border border-newhr-muted/30 rounded-2xl p-6">
+        <summary class="flex items-center justify-between gap-4">
+          <span class="font-display font-semibold text-lg">Я в РФ, events.newhr.org не открывается. Что делать?</span>
+          <svg class="chev shrink-0" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#676C79" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+        </summary>
+        <p class="mt-4 text-newhr-gray leading-relaxed">
+          У платформы есть РФ аналог —
+          <a href="https://events.newhr.ru" target="_blank" rel="noopener" class="link-inline">events.newhr.ru</a>.
+          Логин тот же. Если и эта страница не работает — напиши Ане в личку
+          <a href="https://t.me/newhraccount" target="_blank" rel="noopener" class="link-inline">@newhraccount</a>
+          или на <a href="mailto:contact@new.hr" class="link-inline">contact@new.hr</a>, разберёмся.
+        </p>
+      </details>
+
+      <details class="bg-white border border-newhr-muted/30 rounded-2xl p-6">
+        <summary class="flex items-center justify-between gap-4">
+          <span class="font-display font-semibold text-lg">У меня вопрос, который не хочется задавать публично. К кому обратиться?</span>
+          <svg class="chev shrink-0" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#676C79" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+        </summary>
+        <p class="mt-4 text-newhr-gray leading-relaxed">
+          Пиши Ане в личку —
+          <a href="https://t.me/newhraccount" target="_blank" rel="noopener" class="link-inline">@newhraccount</a>.
+          Также можно написать основательнице —
+          <a href="#" target="_blank" rel="noopener" class="link-inline">@founder</a>.
+          У нас есть общая почта команды —
+          <a href="mailto:contact@new.hr" class="link-inline">contact@new.hr</a>.
+        </p>
+      </details>
+
+      <details class="bg-white border border-newhr-muted/30 rounded-2xl p-6">
+        <summary class="flex items-center justify-between gap-4">
+          <span class="font-display font-semibold text-lg">Хочу выступить с темой / провести эфир. Что делать?</span>
+          <svg class="chev shrink-0" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#676C79" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+        </summary>
+        <p class="mt-4 text-newhr-gray leading-relaxed">
+          Пиши основательнице —
+          <a href="#" target="_blank" rel="noopener" class="link-inline">@founder</a>.
+          Расскажи про тему, идею, формат (доклад / разговор / разбор кейса) — она подскажет, как нам вместе это лучше устроить.
+        </p>
+      </details>
+
+      <details class="bg-white border border-newhr-muted/30 rounded-2xl p-6">
+        <summary class="flex items-center justify-between gap-4">
+          <span class="font-display font-semibold text-lg">Я хочу выйти из Pro. Как?</span>
+          <svg class="chev shrink-0" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#676C79" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+        </summary>
+        <p class="mt-4 text-newhr-gray leading-relaxed">
+          Просто напиши Ане —
+          <a href="https://t.me/newhraccount" target="_blank" rel="noopener" class="link-inline">@newhraccount</a>
+          — мы выпишем без вопросов. Можно вернуться позже, если ситуация изменилась.
+          Никаких локаут-периодов нет.
+        </p>
+      </details>
+
+      <details class="bg-white border border-newhr-muted/30 rounded-2xl p-6">
+        <summary class="flex items-center justify-between gap-4">
+          <span class="font-display font-semibold text-lg">Сколько участников сейчас в Pro?</span>
+          <svg class="chev shrink-0" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#676C79" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+        </summary>
+        <p class="mt-4 text-newhr-gray leading-relaxed">
+          Несколько сотен человек. Цифра меняется (кто-то приходит, кто-то выходит, кого-то выпускают
+          после смены сферы), но активное ядро — стабильно in-house HR в IT.
+        </p>
+      </details>
+
+    </div>
+  </div>
+</section>
+
+<!-- ==================== IF SOMETHING WENT WRONG ==================== -->
+<section class="px-5 md:px-8 py-16 md:py-20 bg-newhr-cream">
+  <div class="max-w-3xl mx-auto">
+    <div class="bg-newhr-dark text-white rounded-2xl p-8 md:p-10">
+      <div class="font-mono text-xs uppercase tracking-widest text-newhr-coral mb-4">Если что-то пошло не так</div>
+      <h2 class="font-display font-bold text-2xl md:text-3xl mb-5">
+        Заметил нарушение, токсичность, утечку или сомнительное поведение?
+      </h2>
+      <p class="text-white/80 leading-relaxed mb-6">
+        Не обязательно поднимать это публично. Есть конфиденциальный канал: напиши на
+        <a href="mailto:contact@new.hr" class="text-newhr-blue underline">contact@new.hr</a>
+        или в личку
+        <a href="https://t.me/newhraccount" target="_blank" rel="noopener" class="text-newhr-blue underline">@newhraccount</a>.
+        Письмо посмотрят основательница и Аня.
+      </p>
+      <p class="text-white/60 text-sm leading-relaxed">
+        Мы не публикуем, кто пожаловался. Не «разбираем публично». Принимаем сигнал, обсуждаем у себя,
+        реагируем — от приватного разговора до удаления из сообщества, в зависимости от ситуации.
+        Подробнее про шкалу реакций — в правилах выше.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== FOOTER ==================== -->
+<footer class="bg-newhr-footer text-newhr-footer-text px-5 md:px-8 py-12">
+  <div class="max-w-5xl mx-auto">
+    <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-6 mb-8">
+      <div class="flex items-center gap-3">
+        <img src="https://static.tildacdn.com/tild3561-3536-4066-b533-383730663162/logo_newhr-03.svg" alt="NEWHR" class="h-7" />
+        <span class="font-mono text-xs uppercase tracking-widest text-newhr-footer-text/60">/ Pro Welcome Pack</span>
+      </div>
+      <div class="flex flex-wrap gap-4 text-sm">
+        <a href="https://events.newhr.org" target="_blank" rel="noopener" class="hover:text-white transition-colors">events.newhr.org</a>
+        <a href="mailto:contact@new.hr" class="hover:text-white transition-colors">contact@new.hr</a>
+      </div>
+    </div>
+    <div class="border-t border-newhr-footer-text/15 pt-6 text-xs text-newhr-footer-text/60 font-mono uppercase tracking-wider">
+      <div>&copy; NEWHR LLC</div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

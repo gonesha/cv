@@ -1,0 +1,310 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>NEWHR CRM — демо</title>
+<meta name="robots" content="noindex">
+<style>
+/* Demo of the CRM Anna built: navy header, blue accent, kanban per funnel.
+   All companies, people and notes are fictional. State lives only in this tab. */
+:root {
+  --bg: #eef2fa; --nav: #1b2a4c; --blue: #2563eb; --blue-soft: #bcd6fb;
+  --ink: #1e293b; --mut: #94a3b8; --line: #e3e9f3; --col: #f5f8fd;
+  --ok: #15803d; --warn: #b45309; --bad: #b91c1c;
+  --mono: "SF Mono", ui-monospace, Menlo, Consolas, monospace;
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body { background: var(--bg); font: 13px/1.45 -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif; color: var(--ink); -webkit-font-smoothing: antialiased; }
+button, input, select { font: inherit; }
+button { cursor: pointer; }
+.mono { font-family: var(--mono); }
+
+.demo { background: #fff7e6; color: #8a5a00; font-size: 11.5px; padding: 6px 16px; border-bottom: 1px solid #f3dfb5; }
+header { background: var(--nav); color: #fff; display: flex; align-items: center; gap: 18px; padding: 0 16px; min-height: 42px; flex-wrap: wrap; }
+.logo { font-weight: 700; font-size: 14px; letter-spacing: .06em; }
+nav { display: flex; gap: 4px; flex-wrap: wrap; }
+nav button { background: transparent; border: 0; color: #c7d2e6; padding: 5px 11px; border-radius: 6px; font-size: 12.5px; }
+nav button[aria-pressed="true"] { background: var(--blue); color: #fff; font-weight: 600; }
+.env { margin-left: auto; font-size: 10.5px; color: #8fa3c4; letter-spacing: .08em; }
+
+.wrap { padding: 16px; }
+.titlerow { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 14px; }
+h1 { font-size: 20px; margin: 0; letter-spacing: -.01em; }
+.tools { display: flex; flex-wrap: wrap; gap: 8px; margin-left: auto; align-items: center; }
+.search { width: 230px; max-width: 100%; padding: 6px 9px; border: 1px solid #d8e0ee; border-radius: 7px; background: #fff; font-size: 12px; }
+.btn { font-size: 11.5px; font-weight: 600; color: #475569; background: #fff; border: 1px solid #d8e0ee; border-radius: 6px; padding: 5px 10px; }
+.btn.primary { background: var(--blue); color: #fff; border-color: var(--blue); }
+.pills { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 12px; align-items: center; }
+.plabel { font-size: 9.5px; color: #93a2b8; letter-spacing: .09em; text-transform: uppercase; margin-right: 2px; }
+.pill { font-size: 11px; padding: 3px 10px; border-radius: 999px; background: #fff; border: 1px solid #e2e8f0; color: #64748b; }
+.pill[aria-pressed="true"] { border-color: var(--blue); background: var(--blue); color: #fff; }
+
+.board { display: flex; gap: 14px; margin-top: 14px; overflow-x: auto; padding-bottom: 10px; align-items: flex-start; }
+.col { width: 230px; flex: none; background: var(--col); border-radius: 10px; padding: 10px 10px 4px; min-height: 120px; transition: background .12s, outline-color .12s; outline: 2px dashed transparent; outline-offset: -2px; }
+.col.over { background: #e6efff; outline-color: var(--blue); }
+.chead { display: flex; justify-content: space-between; align-items: baseline; padding: 2px 2px 10px; }
+.chead b { font-size: 13.5px; }
+.chead span { font-size: 11px; color: var(--mut); font-variant-numeric: tabular-nums; }
+.card { background: #fff; border: 1px solid #e6ebf4; border-radius: 8px; padding: 9px 11px 10px; margin-bottom: 8px; cursor: grab; user-select: none; transition: box-shadow .12s, transform .12s; }
+.card:hover { box-shadow: 0 2px 8px rgba(30,41,59,.08); }
+.card.dragging { opacity: .45; }
+.card.flash { animation: flash .9s ease-out; }
+@keyframes flash { from { box-shadow: 0 0 0 3px var(--blue-soft); } to { box-shadow: none; } }
+.card b { font-size: 12.5px; display: block; }
+.card .meta { font-size: 10px; color: #9aa6b8; margin-top: 4px; }
+.tags { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 6px; }
+.tag { font-size: 9.5px; padding: 1px 7px; border-radius: 999px; background: #eef4ff; color: #3056b8; }
+.tag.risk { background: #fdecec; color: var(--bad); }
+.tag.due { background: #fff3e0; color: var(--warn); }
+.empty { font-size: 11px; color: var(--mut); text-align: center; padding: 14px 4px 18px; }
+
+/* drawer */
+.scrim { position: fixed; inset: 0; background: rgba(15,23,42,.35); opacity: 0; pointer-events: none; transition: opacity .15s; }
+.scrim.on { opacity: 1; pointer-events: auto; }
+.drawer { position: fixed; top: 0; right: 0; bottom: 0; width: min(420px, 100%); background: #fff; box-shadow: -8px 0 30px rgba(15,23,42,.15); transform: translateX(105%); transition: transform .2s; display: flex; flex-direction: column; }
+.drawer.on { transform: none; }
+.dhead { padding: 16px 18px 12px; border-bottom: 1px solid var(--line); display: flex; gap: 10px; align-items: flex-start; }
+.dhead h2 { margin: 0; font-size: 18px; }
+.dhead .sub { font-size: 12px; color: #64748b; margin-top: 2px; }
+.x { margin-left: auto; border: 0; background: #f1f5f9; border-radius: 6px; width: 28px; height: 28px; font-size: 16px; color: #475569; }
+.dbody { padding: 14px 18px 24px; overflow-y: auto; display: flex; flex-direction: column; gap: 16px; }
+.dl { display: grid; grid-template-columns: 110px 1fr; gap: 6px 10px; font-size: 12.5px; }
+.dl dt { color: var(--mut); }
+.dl dd { margin: 0; }
+.h { font-size: 10px; letter-spacing: .1em; text-transform: uppercase; color: var(--mut); margin: 0 0 6px; font-weight: 700; }
+.stage { width: 100%; padding: 6px 8px; border: 1px solid #d8e0ee; border-radius: 7px; background: #fff; }
+.tl { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px; }
+.tl li { font-size: 12.5px; padding-left: 14px; position: relative; }
+.tl li::before { content: ""; position: absolute; left: 0; top: 7px; width: 6px; height: 6px; border-radius: 50%; background: var(--blue-soft); }
+.tl .d { font-family: var(--mono); font-size: 10.5px; color: var(--mut); display: block; }
+.task { display: flex; gap: 8px; align-items: flex-start; font-size: 12.5px; padding: 6px 0; border-bottom: 1px dotted var(--line); }
+.task:last-child { border-bottom: 0; }
+.task .when { margin-left: auto; font-family: var(--mono); font-size: 10.5px; color: var(--warn); white-space: nowrap; }
+.task.done span { text-decoration: line-through; color: var(--mut); }
+.note { width: 100%; min-height: 60px; padding: 8px; border: 1px solid #d8e0ee; border-radius: 7px; resize: vertical; font: inherit; font-size: 12.5px; }
+
+/* digest */
+.modal { position: fixed; inset: 0; display: grid; place-items: center; padding: 16px; pointer-events: none; opacity: 0; transition: opacity .15s; }
+.modal.on { pointer-events: auto; opacity: 1; }
+.tg { width: min(380px, 100%); background: #fff; border-radius: 14px; box-shadow: 0 18px 50px rgba(15,23,42,.25); overflow: hidden; }
+.tgh { background: #517da2; color: #fff; padding: 10px 14px; display: flex; align-items: center; gap: 10px; font-size: 13px; }
+.tgh .av { width: 30px; height: 30px; border-radius: 50%; background: #fff; color: #517da2; display: grid; place-items: center; font-weight: 800; font-size: 12px; }
+.tgb { background: #dfe7ef; padding: 14px; }
+.msg { background: #fff; border-radius: 10px 10px 10px 2px; padding: 10px 12px; font-size: 12.5px; line-height: 1.5; white-space: pre-line; }
+.msg .t { font-family: var(--mono); font-size: 10px; color: var(--mut); text-align: right; margin-top: 4px; }
+
+.toast { position: fixed; left: 50%; bottom: 18px; transform: translateX(-50%) translateY(20px); background: var(--nav); color: #fff; font-size: 12px; padding: 8px 14px; border-radius: 8px; opacity: 0; transition: .2s; pointer-events: none; }
+.toast.on { opacity: 1; transform: translateX(-50%); }
+.help { font-size: 11.5px; color: #64748b; margin-top: 10px; }
+@media (max-width: 600px) { .env { display: none; } .tools { margin-left: 0; width: 100%; } .search { flex: 1; } }
+</style>
+</head>
+<body>
+<div class="demo">Демо-версия CRM, которую я собрала с нуля. Все компании, люди и заметки вымышленные; изменения живут только в этой вкладке.</div>
+<header>
+  <div class="logo">NEWHR</div>
+  <nav id="funnels" aria-label="Воронки"></nav>
+  <div class="env mono">SQLITE · LOCAL · 3000+ карточек в оригинале</div>
+</header>
+
+<div class="wrap">
+  <div class="titlerow">
+    <h1 id="title">Канбан</h1>
+    <div class="tools">
+      <input class="search" id="q" type="search" placeholder="Найти компанию за секунды…" aria-label="Поиск">
+      <button class="btn" id="riskBtn" aria-pressed="false">Только риск оттока</button>
+      <button class="btn primary" id="digestBtn">Дайджест в Telegram</button>
+    </div>
+  </div>
+  <div class="pills" id="tagbar"></div>
+  <div class="board" id="board"></div>
+  <p class="help">Перетащите карточку в другую колонку или откройте её кликом: внутри история касаний, задачи и смена этапа.</p>
+</div>
+
+<div class="scrim" id="scrim"></div>
+<aside class="drawer" id="drawer" aria-hidden="true" aria-label="Карточка компании">
+  <div class="dhead"><div><h2 id="dName"></h2><div class="sub" id="dSub"></div></div><button class="x" id="dClose" aria-label="Закрыть">×</button></div>
+  <div class="dbody" id="dBody"></div>
+</aside>
+
+<div class="modal" id="digest" role="dialog" aria-label="Дайджест задач">
+  <div class="tg">
+    <div class="tgh"><div class="av">CRM</div><div><b>NEWHR CRM · бот</b><div style="font-size:11px;opacity:.8">дайджест по расписанию, 09:00</div></div><button class="x" id="gClose" aria-label="Закрыть" style="background:rgba(255,255,255,.2);color:#fff">×</button></div>
+    <div class="tgb"><div class="msg" id="gText"></div></div>
+  </div>
+</div>
+<div class="toast" id="toast"></div>
+
+<script>
+(function () {
+  var FUNNELS = {
+    zpa: { name: 'Зарплатная аналитика', stages: ['Демо', 'Юристы и NDA', 'Подключение', 'Подписка', 'Продление'] },
+    rec: { name: 'Рекрутинг', stages: ['Бриф', 'Исследование', 'Договор', 'Работаем', 'Холд'] },
+    pro: { name: 'Клуб Pro', stages: ['Заявка', 'Проверка', 'Онбординг', 'Участник'] }
+  };
+  var TODAY = new Date(2026, 10, 17);
+  function d(n) { var x = new Date(TODAY); x.setDate(x.getDate() + n); return x; }
+  function fmt(x) { return ('0' + x.getDate()).slice(-2) + '.' + ('0' + (x.getMonth() + 1)).slice(-2); }
+
+  var C = [
+    ['Altair Soft', 'zpa', 'Продление', 'Фудтех', 'HRD', ['ЗПа', 'риск'], -64, 'Не присылают данные 3 месяца', 2],
+    ['Vega Soft', 'zpa', 'Подписка', 'iGaming', 'Head of TA', ['ЗПа', 'рекрутинг'], -3, 'Пришли за вилками в Европу', 5],
+    ['Orion Labs', 'zpa', 'Юристы и NDA', 'Финтех', 'CHRO', ['ЗПа'], -6, 'Юристы просят правки в NDA', 1],
+    ['Perseus Data', 'zpa', 'Демо', 'E-commerce', 'C&B lead', ['ЗПа'], -1, 'Демо назначено', 3],
+    ['Carina Systems', 'zpa', 'Подключение', 'Банк', 'HRD', ['ЗПа', 'API'], -9, 'Настраиваем выгрузку через API', 0],
+    ['Draco Digital', 'zpa', 'Подписка', 'Геймдев', 'HRBP', ['ЗПа'], -2, 'Обновили данные вовремя', 20],
+    ['Cygnus Group', 'zpa', 'Продление', 'Телеком', 'CHRO', ['ЗПа', 'апселл'], -12, 'Хотят добавить страны', 7],
+    ['Lyra Tech', 'rec', 'Бриф', 'AI', 'CTO', ['рекрутинг'], -1, 'Шорт-лист контракторов', 1],
+    ['Hydra Soft', 'rec', 'Договор', 'SaaS', 'Head of TA', ['рекрутинг'], -4, 'Согласуем приложение к договору', 2],
+    ['Tucana Systems', 'rec', 'Работаем', 'Фудтех', 'HRD', ['рекрутинг', 'ЗПа'], -2, '2 международные вакансии', 6],
+    ['Pyxis Tech', 'rec', 'Работаем', 'iGaming', 'Head of TA', ['рекрутинг'], -5, '4 вакансии после аналитики', 4],
+    ['Volans Soft', 'rec', 'Исследование', 'Маркетплейс', 'HRD', ['рекрутинг'], -8, 'Карта рынка по DevOps', 3],
+    ['Pictor Labs', 'rec', 'Холд', 'Edtech', 'CEO', ['рекрутинг', 'риск'], -40, 'Заморозили найм до Q1', 30],
+    ['Grus Databases', 'rec', 'Исследование', 'Базы данных', 'CTO', ['рекрутинг'], -3, 'Ждём фидбэк по профилям', 2],
+    ['Ara Systems', 'pro', 'Заявка', 'Финтех', 'HRBP', ['Pro'], 0, 'Новая заявка в клуб', 1],
+    ['Auriga Tech', 'pro', 'Проверка', 'Геймдев', 'HR lead', ['Pro'], -1, 'Проверить, что in-house HR', 1],
+    ['Andromeda Labs', 'pro', 'Онбординг', 'SaaS', 'HRD', ['Pro'], -2, 'Отправить welcome-pack', 0],
+    ['Aquila Data', 'pro', 'Участник', 'Банк', 'CHRO', ['Pro', 'ЗПа'], -30, 'Активна в болталке', 14],
+    ['Columba Soft', 'pro', 'Участник', 'Ритейл', 'HR lead', ['Pro'], -90, 'Не заходит 3 месяца', 3]
+  ].map(function (r, i) {
+    return { id: i, name: r[0], f: r[1], stage: r[2], ind: r[3], role: r[4], tags: r[5], last: d(r[6]), note: r[7], due: d(r[8]),
+      tasks: [{ t: taskFor(r), at: d(r[8]), done: false }],
+      hist: [{ at: d(r[6]), t: r[7] }, { at: d(r[6] - 14), t: 'Карточка перенесена из старой базы, дубли схлопнуты' }] };
+  });
+  function taskFor(r) {
+    if (r[5].indexOf('риск') !== -1) return 'Созвониться: выяснить причину тишины';
+    if (r[2] === 'Продление') return 'Подготовить предложение к продлению';
+    if (r[2] === 'Юристы и NDA') return 'Отправить версию NDA с правками';
+    if (r[2] === 'Онбординг') return 'Проверить, что зашёл в канал и болталку';
+    if (r[2] === 'Проверка') return 'Проверить заявку по критериям';
+    return 'Следующий шаг по сделке';
+  }
+
+  var state = { f: 'zpa', q: '', risk: false, tag: null, open: null };
+  var $ = function (id) { return document.getElementById(id); };
+
+  function toast(t) { var el = $('toast'); el.textContent = t; el.classList.add('on'); clearTimeout(toast.h); toast.h = setTimeout(function () { el.classList.remove('on'); }, 1800); }
+
+  function renderNav() {
+    $('funnels').innerHTML = '';
+    Object.keys(FUNNELS).forEach(function (k) {
+      var b = document.createElement('button'); b.textContent = FUNNELS[k].name; b.setAttribute('aria-pressed', String(state.f === k));
+      b.onclick = function () { state.f = k; state.tag = null; render(); };
+      $('funnels').appendChild(b);
+    });
+  }
+  function visible(c) {
+    if (c.f !== state.f) return false;
+    if (state.q && c.name.toLowerCase().indexOf(state.q) === -1 && c.ind.toLowerCase().indexOf(state.q) === -1) return false;
+    if (state.risk && c.tags.indexOf('риск') === -1) return false;
+    if (state.tag && c.tags.indexOf(state.tag) === -1) return false;
+    return true;
+  }
+  function renderTags() {
+    var set = {}; C.forEach(function (c) { if (c.f === state.f) c.tags.forEach(function (t) { set[t] = 1; }); });
+    var bar = $('tagbar'); bar.innerHTML = '<span class="plabel">Теги</span>';
+    Object.keys(set).forEach(function (t) {
+      var b = document.createElement('button'); b.className = 'pill'; b.textContent = t; b.setAttribute('aria-pressed', String(state.tag === t));
+      b.onclick = function () { state.tag = state.tag === t ? null : t; render(); };
+      bar.appendChild(b);
+    });
+  }
+  function cardEl(c) {
+    var el = document.createElement('div'); el.className = 'card'; el.draggable = true; el.dataset.id = c.id; el.tabIndex = 0;
+    var overdue = c.tasks.some(function (t) { return !t.done && t.at <= TODAY; });
+    el.innerHTML = '<b></b><div class="meta mono"></div><div class="tags"></div>';
+    el.querySelector('b').textContent = c.name;
+    el.querySelector('.meta').textContent = c.ind + ' · ' + c.role + ' · касание ' + fmt(c.last);
+    var tg = el.querySelector('.tags');
+    c.tags.forEach(function (t) { var s = document.createElement('span'); s.className = 'tag' + (t === 'риск' ? ' risk' : ''); s.textContent = t; tg.appendChild(s); });
+    if (overdue) { var s = document.createElement('span'); s.className = 'tag due'; s.textContent = 'задача сегодня'; tg.appendChild(s); }
+    el.addEventListener('dragstart', function (e) { el.classList.add('dragging'); e.dataTransfer.setData('text/plain', c.id); e.dataTransfer.effectAllowed = 'move'; });
+    el.addEventListener('dragend', function () { el.classList.remove('dragging'); });
+    el.addEventListener('click', function () { openCard(c.id); });
+    el.addEventListener('keydown', function (e) { if (e.key === 'Enter') openCard(c.id); });
+    return el;
+  }
+  function move(id, stage) {
+    var c = C[id]; if (c.stage === stage) return;
+    c.hist.unshift({ at: TODAY, t: 'Этап: ' + c.stage + ' → ' + stage });
+    c.stage = stage; c.last = TODAY; toast(c.name + ' → ' + stage);
+    render(); var el = document.querySelector('.card[data-id="' + id + '"]'); if (el) el.classList.add('flash');
+    if (state.open === id) openCard(id);
+  }
+  function renderBoard() {
+    var f = FUNNELS[state.f]; $('title').textContent = 'Канбан · ' + f.name;
+    var board = $('board'); board.innerHTML = '';
+    f.stages.forEach(function (s) {
+      var col = document.createElement('div'); col.className = 'col';
+      var list = C.filter(function (c) { return visible(c) && c.stage === s; });
+      col.innerHTML = '<div class="chead"><b></b><span></span></div>';
+      col.querySelector('b').textContent = s; col.querySelector('span').textContent = list.length;
+      list.forEach(function (c) { col.appendChild(cardEl(c)); });
+      if (!list.length) { var e = document.createElement('div'); e.className = 'empty'; e.textContent = 'Перетащите сюда'; col.appendChild(e); }
+      col.addEventListener('dragover', function (e) { e.preventDefault(); col.classList.add('over'); });
+      col.addEventListener('dragleave', function () { col.classList.remove('over'); });
+      col.addEventListener('drop', function (e) { e.preventDefault(); col.classList.remove('over'); move(+e.dataTransfer.getData('text/plain'), s); });
+      board.appendChild(col);
+    });
+  }
+  function openCard(id) {
+    var c = C[id]; state.open = id;
+    $('dName').textContent = c.name; $('dSub').textContent = FUNNELS[c.f].name + ' · ' + c.stage;
+    var b = $('dBody'); b.innerHTML = '';
+    var info = document.createElement('dl'); info.className = 'dl';
+    [['Отрасль', c.ind], ['Контакт', c.role + ' (имя скрыто)'], ['Последнее касание', fmt(c.last)], ['Теги', c.tags.join(', ')]].forEach(function (p) {
+      var dt = document.createElement('dt'); dt.textContent = p[0]; var dd = document.createElement('dd'); dd.textContent = p[1]; info.appendChild(dt); info.appendChild(dd);
+    });
+    b.appendChild(info);
+    var sw = document.createElement('div'); sw.innerHTML = '<p class="h">Этап</p>';
+    var sel = document.createElement('select'); sel.className = 'stage';
+    FUNNELS[c.f].stages.forEach(function (s) { var o = document.createElement('option'); o.textContent = s; o.selected = s === c.stage; sel.appendChild(o); });
+    sel.onchange = function () { move(id, sel.value); }; sw.appendChild(sel); b.appendChild(sw);
+    var tk = document.createElement('div'); tk.innerHTML = '<p class="h">Задачи</p>';
+    c.tasks.forEach(function (t) {
+      var row = document.createElement('label'); row.className = 'task' + (t.done ? ' done' : '');
+      var cb = document.createElement('input'); cb.type = 'checkbox'; cb.checked = t.done;
+      cb.onchange = function () { t.done = cb.checked; if (t.done) { c.hist.unshift({ at: TODAY, t: 'Задача выполнена: ' + t.t }); toast('Задача закрыта'); } render(); openCard(id); };
+      var sp = document.createElement('span'); sp.textContent = t.t; var w = document.createElement('span'); w.className = 'when'; w.textContent = t.at <= TODAY ? 'сегодня' : fmt(t.at);
+      row.appendChild(cb); row.appendChild(sp); row.appendChild(w); tk.appendChild(row);
+    });
+    b.appendChild(tk);
+    var nt = document.createElement('div'); nt.innerHTML = '<p class="h">Добавить заметку</p>';
+    var ta = document.createElement('textarea'); ta.className = 'note'; ta.placeholder = 'Например: созвонились, причина тишины — сменился C&B';
+    var add = document.createElement('button'); add.className = 'btn primary'; add.textContent = 'Сохранить'; add.style.marginTop = '6px';
+    add.onclick = function () { if (!ta.value.trim()) return; c.hist.unshift({ at: TODAY, t: ta.value.trim() }); c.last = TODAY; render(); openCard(id); toast('Заметка сохранена'); };
+    nt.appendChild(ta); nt.appendChild(add); b.appendChild(nt);
+    var hs = document.createElement('div'); hs.innerHTML = '<p class="h">История</p>';
+    var ul = document.createElement('ul'); ul.className = 'tl';
+    c.hist.forEach(function (h) { var li = document.createElement('li'); li.innerHTML = '<span class="d"></span>'; li.querySelector('.d').textContent = fmt(h.at); li.appendChild(document.createTextNode(h.t)); ul.appendChild(li); });
+    hs.appendChild(ul); b.appendChild(hs);
+    $('drawer').classList.add('on'); $('drawer').setAttribute('aria-hidden', 'false'); $('scrim').classList.add('on');
+  }
+  function closeAll() { state.open = null; $('drawer').classList.remove('on'); $('drawer').setAttribute('aria-hidden', 'true'); $('scrim').classList.remove('on'); $('digest').classList.remove('on'); }
+  function digest() {
+    var due = C.filter(function (c) { return c.tasks.some(function (t) { return !t.done && t.at <= d(2); }); });
+    var quiet = C.filter(function (c) { return (TODAY - c.last) / 864e5 > 30; });
+    var lines = ['☀️ Доброе утро! Задачи на ближайшие дни: ' + due.length, ''];
+    due.forEach(function (c) { var t = c.tasks.filter(function (x) { return !x.done; })[0]; lines.push('• ' + c.name + ' — ' + t.t + ' (' + (t.at <= TODAY ? 'сегодня' : fmt(t.at)) + ')'); });
+    lines.push('', '🔕 Молчат больше 30 дней: ' + quiet.length);
+    quiet.forEach(function (c) { lines.push('• ' + c.name + ' — последнее касание ' + fmt(c.last)); });
+    $('gText').innerHTML = ''; $('gText').appendChild(document.createTextNode(lines.join('\n')));
+    var t = document.createElement('div'); t.className = 't'; t.textContent = '09:00 ✓✓'; $('gText').appendChild(t);
+    $('digest').classList.add('on');
+  }
+  function render() { renderNav(); renderTags(); renderBoard(); $('riskBtn').setAttribute('aria-pressed', String(state.risk)); $('riskBtn').classList.toggle('primary', state.risk); }
+
+  $('q').addEventListener('input', function (e) { state.q = e.target.value.trim().toLowerCase(); render(); });
+  $('riskBtn').onclick = function () { state.risk = !state.risk; render(); };
+  $('digestBtn').onclick = digest;
+  $('dClose').onclick = closeAll; $('gClose').onclick = closeAll; $('scrim').onclick = closeAll;
+  $('digest').addEventListener('click', function (e) { if (e.target.id === 'digest') closeAll(); });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeAll(); });
+  render();
+})();
+</script>
+</body>
+</html>

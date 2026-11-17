@@ -47,7 +47,7 @@ b { color: var(--ink); font-weight: 700; }
 .nav a:hover { color: var(--ink); background: var(--leaf); }
 .tocases { font-size: 13px; font-weight: 700; color: var(--ink); text-decoration: none; border: 1px solid var(--line); border-radius: 30px; padding: 3px 12px; margin-left: auto; white-space: nowrap; }
 .tocases:hover { background: var(--leaf); }
-.lang { display: inline-flex; border: 1px solid var(--line); border-radius: 30px; overflow: hidden; }
+.lang { margin-left: auto; display: inline-flex; border: 1px solid var(--line); border-radius: 30px; overflow: hidden; }
 .lang button { border: 0; background: transparent; color: var(--mut); padding: 3px 12px; font-size: 13px; font-weight: 700; }
 .lang button[aria-pressed="true"] { background: var(--ink); color: var(--paper); }
 
@@ -142,6 +142,17 @@ h4 { margin: 0 0 8px; font-size: 12px; text-transform: uppercase; letter-spacing
 
 @media (max-width: 880px) { .case { grid-template-columns: 1fr; gap: 20px; } .two { grid-template-columns: 1fr; } .resbox { border-left: 0; padding-left: 0; border-top: 1px solid var(--line); padding-top: 16px; } }
 #cases + .filters .gut { padding-top: 12px; }
+.case:not(.open) { grid-template-columns: 1fr; gap: 0; padding-block: 22px; }
+.case:not(.open) .facts, .case:not(.open) .body > section, .case:not(.open) .two, .case:not(.open) .take { display: none; }
+.case:not(.open) .body { gap: 10px; }
+.case .sum { margin: 0; font-size: 15px; color: var(--body); max-width: 72ch; }
+.case .sum b { font-weight: 700; }
+.case.open .sum { display: none; }
+.case h3 { cursor: pointer; }
+.case h3:hover { text-decoration: underline; text-decoration-color: var(--line); text-underline-offset: 5px; }
+.ctog { align-self: flex-start; border: 1px solid var(--line); background: transparent; color: var(--ink); border-radius: 30px; padding: 4px 14px; font-size: 13px; font-weight: 700; }
+.ctog:hover { background: var(--leaf); }
+.allbtn { border: 0; background: none; color: var(--ink); font-size: 13px; font-weight: 700; text-decoration: underline; text-underline-offset: 3px; padding: 0 0 0 10px; }
 .pf-tabs { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 20px; }
 .pf-tab { border: 1px solid var(--line); background: transparent; color: var(--ink); border-radius: 30px; padding: 6px 16px; font-size: 14px; font-weight: 700; }
 .pf-tab:hover { background: var(--leaf); }
@@ -206,7 +217,6 @@ footer .gut { display: flex; flex-wrap: wrap; gap: 6px 20px; justify-content: sp
       <a href="#skills"><span class="ru">Навыки</span><span class="en">Skills</span></a>
       <a href="#edu"><span class="ru">Образование</span><span class="en">Education</span></a>
     </nav>
-    <a class="tocases" href="#cases"><span class="t"><span class="ru">Кейсы</span><span class="en">Case studies</span></span> ↓</a>
     <div class="lang" role="group" aria-label="Language">
       <button type="button" data-l="ru" aria-pressed="true">RU</button>
       <button type="button" data-l="en" aria-pressed="false">EN</button>
@@ -309,7 +319,7 @@ footer .gut { display: flex; flex-wrap: wrap; gap: 6px 20px; justify-content: sp
   <div class="gut" role="group" aria-label="Filter cases">
     <span class="lbl"><span class="ru">Кейс про</span><span class="en">Case about</span></span>
     <button type="button" class="flt" id="f-all" data-f="all" aria-pressed="true"><span class="ru">Все</span><span class="en">All</span></button><button type="button" class="flt" id="f-retention" data-f="retention" aria-pressed="false"><span class="ru">Удержание</span><span class="en">Retention</span></button><button type="button" class="flt" id="f-upsell" data-f="upsell" aria-pressed="false"><span class="ru">Апселл</span><span class="en">Upsell</span></button><button type="button" class="flt" id="f-ownership" data-f="ownership" aria-pressed="false">Ownership</button><button type="button" class="flt" id="f-long" data-f="long" aria-pressed="false"><span class="ru">Долгий проект</span><span class="en">Long project</span></button><button type="button" class="flt" id="f-priority" data-f="priority" aria-pressed="false"><span class="ru">Приоритизация</span><span class="en">Prioritisation</span></button><button type="button" class="flt" id="f-negotiation" data-f="negotiation" aria-pressed="false"><span class="ru">Переговоры</span><span class="en">Negotiation</span></button><button type="button" class="flt" id="f-newbiz" data-f="newbiz" aria-pressed="false"><span class="ru">Новые клиенты</span><span class="en">New business</span></button><button type="button" class="flt" id="f-failure" data-f="failure" aria-pressed="false"><span class="ru">Факап</span><span class="en">Failure</span></button>
-    <span class="count" id="count" aria-live="polite"></span>
+    <span class="count" id="count" aria-live="polite"></span><button type="button" class="allbtn" id="allbtn"><span class="ru">Развернуть все</span><span class="en">Expand all</span></button>
   </div>
 </section>
 
@@ -630,6 +640,32 @@ footer .gut { display: flex; flex-wrap: wrap; gap: 6px 20px; justify-content: sp
       document.querySelectorAll('.flt').forEach(function (x) { x.setAttribute('aria-pressed', String(x === b)); });
       renderCases();
     });
+  });
+  function setOpen(c, on) {
+    c.classList.toggle('open', on);
+    var b = c.querySelector('.ctog'); b.setAttribute('aria-expanded', String(on));
+  }
+  cases.forEach(function (c) {
+    var body = c.querySelector('.body'), h3 = body.querySelector('h3');
+    var out = c.querySelector('.facts .out dd');
+    var sum = document.createElement('p'); sum.className = 'sum';
+    sum.innerHTML = '<b><span class="ru">Итог:</span><span class="en">Outcome:</span></b> ' + out.innerHTML;
+    h3.insertAdjacentElement('afterend', sum);
+    var b = document.createElement('button'); b.type = 'button'; b.className = 'ctog'; b.setAttribute('aria-expanded', 'false');
+    b.innerHTML = '<span class="ru">Читать кейс ▾</span><span class="en">Read the case ▾</span>';
+    body.appendChild(b);
+    function toggle() {
+      var on = !c.classList.contains('open'); setOpen(c, on);
+      b.innerHTML = on ? '<span class="ru">Свернуть ▴</span><span class="en">Collapse ▴</span>' : '<span class="ru">Читать кейс ▾</span><span class="en">Read the case ▾</span>';
+      if (!on) c.scrollIntoView({ block: 'nearest' });
+    }
+    b.addEventListener('click', toggle); h3.addEventListener('click', toggle);
+  });
+  var allOpen = false;
+  document.getElementById('allbtn').addEventListener('click', function () {
+    allOpen = !allOpen;
+    cases.forEach(function (c) { setOpen(c, allOpen); c.querySelector('.ctog').innerHTML = allOpen ? '<span class="ru">Свернуть ▴</span><span class="en">Collapse ▴</span>' : '<span class="ru">Читать кейс ▾</span><span class="en">Read the case ▾</span>'; });
+    this.innerHTML = allOpen ? '<span class="ru">Свернуть все</span><span class="en">Collapse all</span>' : '<span class="ru">Развернуть все</span><span class="en">Expand all</span>';
   });
   var saved = null;
   try { saved = localStorage.getItem('ak-cases-lang'); } catch (e) {}

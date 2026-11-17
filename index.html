@@ -107,6 +107,41 @@ b { color: var(--ink); font-weight: 700; }
 .rows.stack li { flex-direction: column; gap: 0; }
 .rows.stack .r { text-align: left; font-size: 14px; }
 
+.filters .gut { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; padding-block: 28px 8px; }
+.filters .lbl { font-size: 12px; text-transform: uppercase; letter-spacing: .12em; color: var(--mut); margin-right: 6px; }
+.flt { border: 1px solid var(--line); background: transparent; color: var(--ink); border-radius: 30px; padding: 5px 14px; font-size: 14px; font-weight: 600; transition: background .15s, color .15s; }
+.flt:hover { background: var(--leaf); }
+.flt[aria-pressed="true"] { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+.count { margin-left: auto; font-size: 13px; color: var(--mut); font-variant-numeric: tabular-nums; }
+
+.cases .gut { display: flex; flex-direction: column; padding-block: 8px 8px; }
+.case { display: grid; grid-template-columns: 240px 1fr; gap: 40px; padding-block: 40px; border-top: 1px solid var(--rule); scroll-margin-top: 64px; }
+.case .facts { align-self: start; background: var(--leaf); border: 1px solid var(--line); border-radius: 4px; padding: 16px 18px; }
+.case .facts .no { font-size: 12px; text-transform: uppercase; letter-spacing: .12em; color: var(--mut); padding-bottom: 10px; margin-bottom: 12px; border-bottom: 1px dotted var(--line); }
+.case .facts dl { margin: 0; display: flex; flex-direction: column; gap: 12px; }
+.case .facts dt { font-size: 11px; text-transform: uppercase; letter-spacing: .1em; color: var(--mut); }
+.case .facts dd { margin: 2px 0 0; font-size: 14px; line-height: 1.4; color: var(--body); }
+.case .facts .out dd { color: var(--ink); font-weight: 700; font-size: 15px; }
+.case .body { display: flex; flex-direction: column; gap: 20px; min-width: 0; }
+.case h3 { font-family: var(--display); font-weight: 500; font-size: clamp(24px, 2.8vw, 30px); line-height: 1.18; letter-spacing: -.012em; color: var(--ink); margin: 0; text-wrap: balance; }
+h4 { margin: 0 0 8px; font-size: 12px; text-transform: uppercase; letter-spacing: .12em; color: var(--mut); font-weight: 700; }
+.body section p { margin: 0; max-width: 72ch; }
+.two { display: grid; grid-template-columns: 1.25fr 1fr; gap: 28px; }
+.acts { margin: 0; padding: 0; list-style: none; counter-reset: a; display: flex; flex-direction: column; gap: 10px; }
+.acts li { counter-increment: a; position: relative; padding-left: 34px; font-size: 15px; line-height: 1.5; }
+.acts li::before { content: counter(a); position: absolute; left: 0; top: 0; width: 22px; height: 22px; border-radius: 50%; border: 1px solid var(--line); display: grid; place-items: center; font-size: 12px; font-weight: 700; color: var(--ink); }
+.resbox { border-left: 1px solid var(--line); padding-left: 24px; }
+.case .res { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 10px; }
+.case .res li { position: relative; padding-left: 24px; font-size: 15px; line-height: 1.5; }
+.case .res li::before { content: "✓"; position: absolute; left: 0; top: 0; color: var(--good); font-weight: 800; }
+.take { margin: 4px 0 0; background: var(--ink); color: var(--paper); border-radius: 4px; padding: 20px 24px; font-family: var(--display); font-style: italic; font-size: clamp(20px, 2.2vw, 24px); line-height: 1.35; max-width: none; display: flex; flex-direction: column; gap: 8px; }
+.take .tl { font-family: var(--text); font-style: normal; font-size: 11px; text-transform: uppercase; letter-spacing: .14em; color: var(--line); font-weight: 700; }
+.case .vec { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: -6px; }
+.case .vt { font-size: 12px; font-weight: 700; color: var(--ink); border: 1px solid var(--line); border-radius: 30px; padding: 2px 11px; }
+.case .vt.main { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+
+@media (max-width: 880px) { .case { grid-template-columns: 1fr; gap: 20px; } .two { grid-template-columns: 1fr; } .resbox { border-left: 0; padding-left: 0; border-top: 1px solid var(--line); padding-top: 16px; } }
+#cases + .filters .gut { padding-top: 12px; }
 .pf-tabs { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 20px; }
 .pf-tab { border: 1px solid var(--line); background: transparent; color: var(--ink); border-radius: 30px; padding: 6px 16px; font-size: 14px; font-weight: 700; }
 .pf-tab:hover { background: var(--leaf); }
@@ -166,11 +201,12 @@ footer .gut { display: flex; flex-wrap: wrap; gap: 6px 20px; justify-content: sp
     <div class="who">Анна <span>Каленикова</span></div>
     <nav class="nav" aria-label="Sections">
       <a href="#exp"><span class="ru">Опыт</span><span class="en">Experience</span></a>
+      <a href="#cases"><span class="ru">Кейсы</span><span class="en">Cases</span></a>
       <a href="#portfolio"><span class="ru">Портфолио</span><span class="en">Portfolio</span></a>
       <a href="#skills"><span class="ru">Навыки</span><span class="en">Skills</span></a>
       <a href="#edu"><span class="ru">Образование</span><span class="en">Education</span></a>
     </nav>
-    <a class="tocases" href="https://gonesha.github.io/cases/"><span class="t"><span class="ru">Кейсы</span><span class="en">Case studies</span></span> ↗</a>
+    <a class="tocases" href="#cases"><span class="t"><span class="ru">Кейсы</span><span class="en">Case studies</span></span> ↓</a>
     <div class="lang" role="group" aria-label="Language">
       <button type="button" data-l="ru" aria-pressed="true">RU</button>
       <button type="button" data-l="en" aria-pressed="false">EN</button>
@@ -263,6 +299,205 @@ footer .gut { display: flex; flex-wrap: wrap; gap: 6px 20px; justify-content: sp
   </div>
 </section>
 
+<section class="sec" id="cases">
+  <div class="gut">
+    <h2><span class="ru">Кейсы</span><span class="en">Case studies</span></h2>
+    <p class="sub"><span class="ru">Девять историй с цифрами: ситуация, что я сделала, результат и вывод. Названия клиентов — по запросу (NDA).</span><span class="en">Nine stories with numbers: situation, what I did, result and takeaway. Client names on request (NDA).</span></p>
+  </div>
+</section>
+<section class="filters">
+  <div class="gut" role="group" aria-label="Filter cases">
+    <span class="lbl"><span class="ru">Кейс про</span><span class="en">Case about</span></span>
+    <button type="button" class="flt" id="f-all" data-f="all" aria-pressed="true"><span class="ru">Все</span><span class="en">All</span></button><button type="button" class="flt" id="f-retention" data-f="retention" aria-pressed="false"><span class="ru">Удержание</span><span class="en">Retention</span></button><button type="button" class="flt" id="f-upsell" data-f="upsell" aria-pressed="false"><span class="ru">Апселл</span><span class="en">Upsell</span></button><button type="button" class="flt" id="f-ownership" data-f="ownership" aria-pressed="false">Ownership</button><button type="button" class="flt" id="f-long" data-f="long" aria-pressed="false"><span class="ru">Долгий проект</span><span class="en">Long project</span></button><button type="button" class="flt" id="f-priority" data-f="priority" aria-pressed="false"><span class="ru">Приоритизация</span><span class="en">Prioritisation</span></button><button type="button" class="flt" id="f-negotiation" data-f="negotiation" aria-pressed="false"><span class="ru">Переговоры</span><span class="en">Negotiation</span></button><button type="button" class="flt" id="f-newbiz" data-f="newbiz" aria-pressed="false"><span class="ru">Новые клиенты</span><span class="en">New business</span></button><button type="button" class="flt" id="f-failure" data-f="failure" aria-pressed="false"><span class="ru">Факап</span><span class="en">Failure</span></button>
+    <span class="count" id="count" aria-live="polite"></span>
+  </div>
+</section>
+
+<section class="cases">
+  <div class="gut">
+<article class="case" id="c01" data-tags="retention upsell ownership">
+  <aside class="facts">
+    <div class="no"><span class="ru">Кейс</span><span class="en">Case</span> 01</div>
+    <dl>
+      <div><dt><span class="ru">Где</span><span class="en">Where</span></dt><dd><span class="ru">NEWHR · зарплатная аналитика</span><span class="en">NEWHR · salary analytics</span></dd></div>
+      <div><dt><span class="ru">Клиент</span><span class="en">Client</span></dt><dd><span class="ru">крупная фудтех-компания</span><span class="en">a large food-tech company</span></dd></div>
+      <div class="out"><dt><span class="ru">Итог</span><span class="en">Outcome</span></dt><dd><span class="ru">клиент остался, данные идут через API, +2 вакансии в рекрутинг</span><span class="en">client retained, data flows via API, +2 vacancies for recruitment</span></dd></div>
+    </dl>
+  </aside>
+  <div class="body">
+    <div class="vec"><span class="vt main"><span class="ru">Удержание</span><span class="en">Retention</span></span><span class="vt"><span class="ru">Апселл</span><span class="en">Upsell</span></span><span class="vt">Ownership</span></div>
+    <h3><span class="ru">Удержала клиента на грани ухода и продала ему второй продукт</span><span class="en">Kept a client on the verge of leaving and sold them a second service</span></h3>
+    <section><h4><span class="ru">Ситуация</span><span class="en">Situation</span></h4><p><span class="ru">Продукт — подписка на зарплатную аналитику, устроенная как обмен: клиент каждый месяц передаёт данные о своих наймах и получает доступ ко всей базе рынка. Крупная фудтех-компания несколько месяцев подряд не присылала данные, напоминания по почте не помогали. Без данных клиент перестаёт получать ценность и к продлению приходит с готовым решением уйти.</span><span class="en">The product is a salary analytics subscription that works as an exchange: each month the client shares its hiring data and gets access to the whole market. A large food-tech client stopped sending data for several months, and email reminders did not help. Without data, a client stops getting value and comes to renewal ready to leave.</span></p></section>
+    <div class="two">
+      <section><h4><span class="ru">Что я сделала</span><span class="en">What I did</span></h4><ol class="acts"><li><span class="ru">Вместо третьего напоминания договорилась о звонке с контактным лицом.</span><span class="en">Instead of a third reminder, I set up a call with our contact.</span></li><li><span class="ru">На звонке выяснила причину: дело не в продукте. Команда перегружена, и ручная ежемесячная выгрузка выпадала из приоритетов.</span><span class="en">On the call I found the cause: not the product, but an overloaded team that kept dropping the manual monthly export.</span></li><li><span class="ru">Предложила убрать ручную работу, и мы договорились подтягивать данные через API.</span><span class="en">I proposed removing the manual work, and we agreed to pull the data via API.</span></li><li><span class="ru">В разговоре о загрузке команды всплыла потребность в найме, и я предложила наш рекрутинг.</span><span class="en">While discussing their workload, a hiring need came up, and I offered our recruitment service.</span></li></ol></section>
+      <section class="resbox"><h4><span class="ru">Результат</span><span class="en">Result</span></h4><ul class="res"><li><span class="ru">Клиент остался с продуктом.</span><span class="en">The client stayed with the product.</span></li><li><span class="ru">Данные поступают регулярно и без участия команды клиента.</span><span class="en">Data now arrives regularly without effort from their team.</span></li><li><span class="ru">Компания передала нам в рекрутинг <b>2 вакансии</b> на международном рынке.</span><span class="en">The company gave us <b>2 international vacancies</b> to recruit for.</span></li><li><span class="ru">По всему портфелю — <b>91% удержания</b> за год.</span><span class="en">Across the portfolio: <b>91% retention</b> for the year.</span></li></ul></section>
+    </div>
+    <p class="take"><span class="tl"><span class="ru">Вывод</span><span class="en">Takeaway</span></span><span class="tk"><span class="ru">За молчанием клиента почти всегда стоит конкретная причина. Её снимает разговор, а не очередное напоминание.</span><span class="en">Behind a silent client there is almost always a specific cause. A conversation removes it; another reminder does not.</span></span></p>
+  </div>
+</article>
+<article class="case" id="c02" data-tags="upsell negotiation">
+  <aside class="facts">
+    <div class="no"><span class="ru">Кейс</span><span class="en">Case</span> 02</div>
+    <dl>
+      <div><dt><span class="ru">Где</span><span class="en">Where</span></dt><dd><span class="ru">NEWHR · аналитика и рекрутинг</span><span class="en">NEWHR · analytics and recruitment</span></dd></div>
+      <div><dt><span class="ru">Клиент</span><span class="en">Client</span></dt><dd><span class="ru">европейский iGaming-холдинг</span><span class="en">a European iGaming group</span></dd></div>
+      <div class="out"><dt><span class="ru">Итог</span><span class="en">Outcome</span></dt><dd><span class="ru">4 вакансии в рекрутинг через месяц после подключения аналитики</span><span class="en">4 vacancies for recruitment a month after joining analytics</span></dd></div>
+    </dl>
+  </aside>
+  <div class="body">
+    <div class="vec"><span class="vt main"><span class="ru">Апселл</span><span class="en">Upsell</span></span><span class="vt"><span class="ru">Переговоры</span><span class="en">Negotiation</span></span></div>
+    <h3><span class="ru">Через месяц после подключения аналитики клиент отдал нам четыре вакансии</span><span class="en">A month after joining our analytics, the client gave us four vacancies</span></h3>
+    <section><h4><span class="ru">Ситуация</span><span class="en">Situation</span></h4><p><span class="ru">Холдинг пришёл за аналитикой по рекомендации собственника группы. Компания перешла на найм в Европу, и зарплатные вилки на 2025 год перестали соответствовать рынку. Head of TA собрала внутреннюю статистику, но собственники ей не поверили: «вы внутренние, вы заинтересованы». При этом у компании было 39 открытых вакансий, и все сложные.</span><span class="en">The group came for analytics on the owner's recommendation. It had moved hiring to Europe, and the 2025 salary ranges no longer matched the market. The Head of TA collected internal data, but the owners did not trust it: "you're internal, you have an interest". The company also had 39 open, hard-to-fill vacancies.</span></p></section>
+    <div class="two">
+      <section><h4><span class="ru">Что я сделала</span><span class="en">What I did</span></h4><ol class="acts"><li><span class="ru">На первой встрече сформулировала настоящую задачу: клиенту нужен независимый источник, которому поверят собственники, а не просто данные.</span><span class="en">At the first meeting I framed the real task: an independent source the owners would trust, not just data.</span></li><li><span class="ru">Подключила аналитику и помогла с данными под их вопрос о вилках.</span><span class="en">Connected them to analytics and helped with the data for their salary question.</span></li><li><span class="ru">Месяц была на связи: отвечала на вопросы, держала в курсе обновлений.</span><span class="en">Stayed in close contact for a month, answering questions and sharing updates.</span></li><li><span class="ru">Рекрутинг не навязывала, но держала в фокусе их 39 открытых вакансий.</span><span class="en">Did not push recruitment, but kept their 39 open roles in mind.</span></li></ol></section>
+      <section class="resbox"><h4><span class="ru">Результат</span><span class="en">Result</span></h4><ul class="res"><li><span class="ru">Через месяц клиент сам передал в работу <b>4 вакансии</b>.</span><span class="en">A month later the client came to us with <b>4 vacancies</b>.</span></li><li><span class="ru">Клиент работает сразу с двумя направлениями компании.</span><span class="en">The client now works with both of our business lines.</span></li><li><span class="ru">Клиентская база продукта за год выросла <b>в 2,5 раза</b>, в том числе за счёт действующих клиентов.</span><span class="en">The product client base grew <b>2.5×</b> in a year, partly through existing clients.</span></li></ul></section>
+    </div>
+    <p class="take"><span class="tl"><span class="ru">Вывод</span><span class="en">Takeaway</span></span><span class="tk"><span class="ru">Второй продукт продаёт доверие, заработанное на первом.</span><span class="en">Trust earned on the first product is what sells the second.</span></span></p>
+  </div>
+</article>
+<article class="case" id="c03" data-tags="ownership">
+  <aside class="facts">
+    <div class="no"><span class="ru">Кейс</span><span class="en">Case</span> 03</div>
+    <dl>
+      <div><dt><span class="ru">Где</span><span class="en">Where</span></dt><dd><span class="ru">NEWHR · внутренние системы</span><span class="en">NEWHR · internal systems</span></dd></div>
+      <div><dt><span class="ru">Клиент</span><span class="en">Client</span></dt><dd><span class="ru">вся работа с клиентами компании</span><span class="en">the company's whole client work</span></dd></div>
+      <div class="out"><dt><span class="ru">Итог</span><span class="en">Outcome</span></dt><dd><span class="ru">3000+ карточек в одной системе вместо пяти разрозненных источников</span><span class="en">3,000+ records in one system instead of five scattered sources</span></dd></div>
+    </dl>
+  </aside>
+  <div class="body">
+    <div class="vec"><span class="vt main">Ownership</span></div>
+    <h3><span class="ru">Спроектировала и внедрила CRM компании по собственной инициативе</span><span class="en">Designed and launched the company's CRM on my own initiative</span></h3>
+    <section><h4><span class="ru">Ситуация</span><span class="en">Situation</span></h4><p><span class="ru">Данные о клиентах были разбросаны по amoCRM, Notion, таблицам, Telegram и памяти коллег. Чтобы ответить на вопрос «что у нас с клиентом, когда договор, кто последним общался», приходилось проверять всё. Задачу сделать CRM никто не ставил.</span><span class="en">Client data was scattered across amoCRM, Notion, spreadsheets, Telegram and colleagues' memory. Answering "where are we with this client, when is the contract, who spoke to them last" meant checking everything. Nobody had asked for a CRM.</span></p></section>
+    <div class="two">
+      <section><h4><span class="ru">Что я сделала</span><span class="en">What I did</span></h4><ol class="acts"><li><span class="ru">Спроектировала структуру из 5 воронок: рекрутинг, аналитика, лиды, клуб, исследования.</span><span class="en">Designed five pipelines: recruitment, analytics, leads, club and research.</span></li><li><span class="ru">Написала около 50 Python-скриптов для импорта, дедупликации и обогащения данных.</span><span class="en">Wrote around 50 Python scripts for import, deduplication and enrichment.</span></li><li><span class="ru">Настроила автобэкапы, сохранение истории изменений и Telegram-дайджест задач по расписанию.</span><span class="en">Set up automatic backups, change history and a scheduled task digest in Telegram.</span></li><li><span class="ru">Описала плейбук, чтобы системой мог пользоваться не только я.</span><span class="en">Wrote a playbook so the system does not depend on me.</span></li></ol></section>
+      <section class="resbox"><h4><span class="ru">Результат</span><span class="en">Result</span></h4><ul class="res"><li><span class="ru"><b>3000+ карточек</b> компаний и контактов в одном месте: история, договоры, задачи.</span><span class="en"><b>3,000+ records</b> of companies and contacts in one place: history, contracts, tasks.</span></li><li><span class="ru">Нулевая стоимость владения, данные под NDA не уходят в сторонний сервис.</span><span class="en">Zero running cost; NDA data never leaves the company.</span></li><li><span class="ru">На этой системе держится работа с удержанием: видно, кто из клиентов замолчал.</span><span class="en">Retention work runs on it: I can see which clients have gone quiet.</span></li></ul></section>
+    </div>
+    <p class="take"><span class="tl"><span class="ru">Вывод</span><span class="en">Takeaway</span></span><span class="tk"><span class="ru">Если процесс мешает каждый день, его нужно чинить, и так, чтобы починку можно было передать.</span><span class="en">If a process hurts every day, fix it, and make the fix transferable.</span></span></p>
+  </div>
+</article>
+<article class="case" id="c04" data-tags="ownership retention">
+  <aside class="facts">
+    <div class="no"><span class="ru">Кейс</span><span class="en">Case</span> 04</div>
+    <dl>
+      <div><dt><span class="ru">Где</span><span class="en">Where</span></dt><dd><span class="ru">NEWHR · клуб NEWHR Pro и аналитика</span><span class="en">NEWHR · NEWHR Pro club and analytics</span></dd></div>
+      <div><dt><span class="ru">Клиент</span><span class="en">Client</span></dt><dd><span class="ru">участники клуба и клиенты продукта</span><span class="en">club members and product clients</span></dd></div>
+      <div class="out"><dt><span class="ru">Итог</span><span class="en">Outcome</span></dt><dd><span class="ru">3–5 обращений вместо 20–30 в день эфира</span><span class="en">3–5 tickets instead of 20–30 on a live-session day</span></dd></div>
+    </dl>
+  </aside>
+  <div class="body">
+    <div class="vec"><span class="vt main">Ownership</span><span class="vt"><span class="ru">Удержание</span><span class="en">Retention</span></span></div>
+    <h3><span class="ru">Сократила поток обращений в поддержку в дни эфиров в несколько раз</span><span class="en">Cut support tickets on live-session days several times over</span></h3>
+    <section><h4><span class="ru">Ситуация</span><span class="en">Situation</span></h4><p><span class="ru">Участники клуба NEWHR Pro и клиенты аналитики не могли войти: заходили не с той почты, путали доменные зоны и считали, что ошибка на нашей стороне. Пик приходился на дни закрытых эфиров — 20–30 обращений за день.</span><span class="en">NEWHR Pro members and analytics clients could not log in: wrong email, wrong domain, and they assumed the fault was ours. The peak came on closed live-session days, with 20–30 tickets a day.</span></p></section>
+    <div class="two">
+      <section><h4><span class="ru">Что я сделала</span><span class="en">What I did</span></h4><ol class="acts"><li><span class="ru">Сначала разбирала обращения вручную, по одному.</span><span class="en">At first I handled tickets manually, one by one.</span></li><li><span class="ru">Проанализировала обращения вместе и выделила 2–3 повторяющихся сценария.</span><span class="en">Then I looked at them together and found 2–3 recurring scenarios.</span></li><li><span class="ru">Собрала welcome-pack: как войти, с какой почты, где что находится.</span><span class="en">Built a welcome pack: how to log in, which email to use, where to find things.</span></li><li><span class="ru">Запустила бота, который проводит пользователя по типовым ситуациям до обращения в поддержку.</span><span class="en">Launched a bot that walks users through common cases before they contact support.</span></li></ol></section>
+      <section class="resbox"><h4><span class="ru">Результат</span><span class="en">Result</span></h4><ul class="res"><li><span class="ru">В дни эфиров <b>3–5 обращений вместо 20–30</b>.</span><span class="en">On live-session days: <b>3–5 tickets instead of 20–30</b>.</span></li><li><span class="ru">Оставшиеся обращения — предложения по улучшению, а не жалобы.</span><span class="en">The remaining tickets are suggestions, not complaints.</span></li><li><span class="ru">Клуб вырос <b>со 150 до 500+</b> участников без дополнительной нагрузки на команду.</span><span class="en">The club grew <b>from 150 to 500+</b> members with no extra load on the team.</span></li></ul></section>
+    </div>
+    <p class="take"><span class="tl"><span class="ru">Вывод</span><span class="en">Takeaway</span></span><span class="tk"><span class="ru">Если одна и та же жалоба приходит в третий раз, это задача на процесс.</span><span class="en">When the same complaint arrives a third time, it is a process problem.</span></span></p>
+  </div>
+</article>
+<article class="case" id="c05" data-tags="priority long">
+  <aside class="facts">
+    <div class="no"><span class="ru">Кейс</span><span class="en">Case</span> 05</div>
+    <dl>
+      <div><dt><span class="ru">Где</span><span class="en">Where</span></dt><dd><span class="ru">NEWHR · CRM 2.0</span><span class="en">NEWHR · CRM 2.0</span></dd></div>
+      <div><dt><span class="ru">Клиент</span><span class="en">Client</span></dt><dd><span class="ru">внутренний продукт</span><span class="en">internal product</span></dd></div>
+      <div class="out"><dt><span class="ru">Итог</span><span class="en">Outcome</span></dt><dd><span class="ru">план разработки изменён до того, как в него вложили недели работы</span><span class="en">the build plan changed before weeks of work went into it</span></dd></div>
+    </dl>
+  </aside>
+  <div class="body">
+    <div class="vec"><span class="vt main"><span class="ru">Приоритизация</span><span class="en">Prioritisation</span></span><span class="vt"><span class="ru">Долгий проект</span><span class="en">Long project</span></span></div>
+    <h3><span class="ru">Пересмотрела план разработки CRM 2.0 до старта работ</span><span class="en">Reworked the CRM 2.0 build plan before development started</span></h3>
+    <section><h4><span class="ru">Ситуация</span><span class="en">Situation</span></h4><p><span class="ru">Первую CRM решили пересобрать на новой архитектуре. Был подробный инженерный план на 1300+ строк и два раунда ревью, но не было ответа на главные вопросы: для кого инструмент, какую работу он делает и как понять, что он получился.</span><span class="en">We decided to rebuild the first CRM on a new architecture. There was a detailed 1,300-line engineering plan and two review rounds, but no answer to the key questions: who the tool is for, what job it does and how we know it works.</span></p></section>
+    <div class="two">
+      <section><h4><span class="ru">Что я сделала</span><span class="en">What I did</span></h4><ol class="acts"><li><span class="ru">Написала продуктовую стратегию до начала разработки.</span><span class="en">Wrote a product strategy before development began.</span></li><li><span class="ru">Сделала срез живой базы и показала, что под словом «воронки» скрываются три разные задачи: продажи, сообщество клуба и панель респондентов. Канбан-доска нужна только продажам.</span><span class="en">Analysed the live data and showed that "pipelines" were three different jobs: sales, the club community and a research panel. Only sales needs a pipeline board.</span></li><li><span class="ru">Расставила приоритеты по ценности для ежедневной работы: найти клиента за секунды, затем документы без копипасты, сохранность данных и контекст из досье.</span><span class="en">Set priorities by daily value: find a client in seconds first, then documents without copy-paste, data safety and context from client notes.</span></li><li><span class="ru">Разбила разработку на вехи с проверяемым результатом и фиксировала решения в журнале.</span><span class="en">Split the build into milestones with checkable results and kept a decision log.</span></li></ol></section>
+      <section class="resbox"><h4><span class="ru">Результат</span><span class="en">Result</span></h4><ul class="res"><li><span class="ru">Архитектура строится под три реальных сценария, а не под одну усреднённую модель.</span><span class="en">The architecture serves three real scenarios, not one averaged model.</span></li><li><span class="ru">Порядок работ определяется ценностью, второстепенное отложено осознанно.</span><span class="en">Work is ordered by value; nice-to-haves are deliberately parked.</span></li><li><span class="ru">План скорректирован <b>до того, как в него вложили недели работы</b>.</span><span class="en">The plan was corrected <b>before weeks of work went into it</b>.</span></li></ul></section>
+    </div>
+    <p class="take"><span class="tl"><span class="ru">Вывод</span><span class="en">Takeaway</span></span><span class="tk"><span class="ru">Самое дорогое в долгой разработке — хорошо сделанная не та вещь.</span><span class="en">The costliest mistake in a long build is building the wrong thing well.</span></span></p>
+  </div>
+</article>
+<article class="case" id="c06" data-tags="negotiation newbiz ownership">
+  <aside class="facts">
+    <div class="no"><span class="ru">Кейс</span><span class="en">Case</span> 06</div>
+    <dl>
+      <div><dt><span class="ru">Где</span><span class="en">Where</span></dt><dd><span class="ru">NEWHR · рекрутинг</span><span class="en">NEWHR · recruitment</span></dd></div>
+      <div><dt><span class="ru">Клиент</span><span class="en">Client</span></dt><dd><span class="ru">AI-компания</span><span class="en">an AI company</span></dd></div>
+      <div class="out"><dt><span class="ru">Итог</span><span class="en">Outcome</span></dt><dd><span class="ru">договор под новый формат согласован за 2 дня</span><span class="en">contract for a new format agreed in 2 days</span></dd></div>
+    </dl>
+  </aside>
+  <div class="body">
+    <div class="vec"><span class="vt main"><span class="ru">Переговоры</span><span class="en">Negotiation</span></span><span class="vt"><span class="ru">Новые клиенты</span><span class="en">New business</span></span><span class="vt">Ownership</span></div>
+    <h3><span class="ru">Подготовила КП и договор под новый формат сделки и согласовала их за два дня</span><span class="en">Prepared the proposal and contract for a new deal format and agreed them in two days</span></h3>
+    <section><h4><span class="ru">Ситуация</span><span class="en">Situation</span></h4><p><span class="ru">AI-компании нужен был не найм сотрудников, а шорт-лист проверенных контракторов на частичную занятость с оплатой за каждого кандидата. Стандартный договор агентства устроен иначе: процент от годового дохода нанятого и гарантийная замена.</span><span class="en">An AI company needed not hires but a shortlist of vetted part-time contractors, paid per candidate. Our standard contract works differently: a percentage of annual pay and a replacement guarantee.</span></p></section>
+    <div class="two">
+      <section><h4><span class="ru">Что я сделала</span><span class="en">What I did</span></h4><ol class="acts"><li><span class="ru">Собрала коммерческое предложение по брифу: роль, профиль кандидатов, критерии отбора, условия для кандидатов, формат передачи, экономика пилота.</span><span class="en">Built the proposal from the brief: role, candidate profile, selection criteria, candidate terms, delivery format and pilot economics.</span></li><li><span class="ru">Перестроила договор: общие условия подходят и для рекрутинга, и для шорт-листа, а специфика шорт-листа вынесена в приложение.</span><span class="en">Restructured the contract: general terms cover both recruitment and shortlists, with shortlist specifics in an annex.</span></li><li><span class="ru">Заранее прописала спорные места: срок приёмки кандидата, отказ только по согласованным критериям, правило дублей, оплата независимо от исхода интервью.</span><span class="en">Settled the usual disputes upfront: acceptance window, rejection only on agreed criteria, duplicates rule, payment regardless of interview outcome.</span></li><li><span class="ru">Продумала удобную для клиента схему оплаты: юрлицо, налоги на стороне клиента, способы оплаты.</span><span class="en">Worked out a convenient payment setup: legal entity, the client's taxes, payment methods.</span></li></ol></section>
+      <section class="resbox"><h4><span class="ru">Результат</span><span class="en">Result</span></h4><ul class="res"><li><span class="ru">Договор согласован <b>за 2 дня</b>.</span><span class="en">Contract agreed <b>in 2 days</b>.</span></li><li><span class="ru">Следующие форматы оформляются новым приложением, без переписывания договора.</span><span class="en">New formats can be added as annexes without rewriting the contract.</span></li></ul></section>
+    </div>
+    <p class="take"><span class="tl"><span class="ru">Вывод</span><span class="en">Takeaway</span></span><span class="tk"><span class="ru">Когда спорные места закрыты до старта, торговаться не о чем, и согласование идёт быстро.</span><span class="en">When disputes are settled upfront, there is nothing to haggle over, and approval is fast.</span></span></p>
+  </div>
+</article>
+<article class="case" id="c07" data-tags="long priority negotiation">
+  <aside class="facts">
+    <div class="no"><span class="ru">Кейс</span><span class="en">Case</span> 07</div>
+    <dl>
+      <div><dt><span class="ru">Где</span><span class="en">Where</span></dt><dd><span class="ru">NEWHR · исследование бренда работодателя</span><span class="en">NEWHR · employer brand study</span></dd></div>
+      <div><dt><span class="ru">Клиент</span><span class="en">Client</span></dt><dd><span class="ru">внешний заказчик</span><span class="en">an external client</span></dd></div>
+      <div class="out"><dt><span class="ru">Итог</span><span class="en">Outcome</span></dt><dd><span class="ru">сдано в срок: 6 месяцев, 12 человек, бюджет свыше 1 млн ₽</span><span class="en">delivered on time: 6 months, 12 people, budget over ₽1M</span></dd></div>
+    </dl>
+  </aside>
+  <div class="body">
+    <div class="vec"><span class="vt main"><span class="ru">Долгий проект</span><span class="en">Long project</span></span><span class="vt"><span class="ru">Приоритизация</span><span class="en">Prioritisation</span></span><span class="vt"><span class="ru">Переговоры</span><span class="en">Negotiation</span></span></div>
+    <h3><span class="ru">Довела полугодовой проект с командой из 12 человек до сдачи в срок</span><span class="en">Led a six-month project with a team of 12 to on-time delivery</span></h3>
+    <section><h4><span class="ru">Ситуация</span><span class="en">Situation</span></h4><p><span class="ru">Исследование бренда работодателя: 6 месяцев, бюджет свыше 1 млн ₽, 12 человек из пяти подразделений — ресечер, контент, дизайн, технический департамент, внешний эксперт. Я вела проект с двух сторон: заказчик и команда. Прямого подчинения не было ни с кем, у команды были параллельные проекты, рядом шло ещё одно исследование.</span><span class="en">An employer brand study: 6 months, a budget over ₽1M, 12 people from five departments: research, content, design, tech and an external expert. I managed both the client and the team. Nobody reported to me, everyone had other projects, and another study ran in parallel.</span></p></section>
+    <div class="two">
+      <section><h4><span class="ru">Что я сделала</span><span class="en">What I did</span></h4><ol class="acts"><li><span class="ru">Построила диаграмму Ганта и при согласовании с заказчиком заложила 20% времени на форс-мажоры.</span><span class="en">Built a Gantt chart and agreed a 20% time buffer with the client from the start.</span></li><li><span class="ru">Посчитала окупаемость проекта и трудозатраты в человеко-часах по каждому участнику.</span><span class="en">Calculated payback and person-hours for every team member.</span></li><li><span class="ru">Разблокировала договор: согласование застряло у юристов заказчика, я вышла на звонок с главным ЛПР, и договор согласовали за 3 дня.</span><span class="en">Unblocked the contract: it was stuck with the client's lawyers, so I called the main decision-maker, and it was signed in 3 days.</span></li><li><span class="ru">Изучила методологию исследований, чтобы согласовывать работу с заказчиком напрямую, не дожидаясь эксперта.</span><span class="en">Learned research methodology to agree the work with the client directly, without waiting for the expert.</span></li><li><span class="ru">Когда кто-то мог задержать свою часть, помогала выстроить приоритеты и делегировать.</span><span class="en">When someone was at risk of slipping, I helped them reprioritise and delegate.</span></li></ol></section>
+      <section class="resbox"><h4><span class="ru">Результат</span><span class="en">Result</span></h4><ul class="res"><li><span class="ru">Проект сдан <b>в срок</b>.</span><span class="en">The project was delivered <b>on time</b>.</span></li><li><span class="ru">Договор с заказчиком согласован <b>за 3 дня</b> после звонка с ЛПР.</span><span class="en">The client contract was signed <b>in 3 days</b> after the call with the decision-maker.</span></li><li><span class="ru">12 человек из пяти подразделений работали по одному плану без административного рычага.</span><span class="en">12 people from five departments worked to one plan without formal authority.</span></li></ul></section>
+    </div>
+    <p class="take"><span class="tl"><span class="ru">Вывод</span><span class="en">Takeaway</span></span><span class="tk"><span class="ru">Буфер закладывают на старте, а без формальной власти ведут через прозрачность и помощь.</span><span class="en">Plan the buffer at the start. Without authority, lead through transparency and support.</span></span></p>
+  </div>
+</article>
+<article class="case" id="c08" data-tags="newbiz upsell ownership">
+  <aside class="facts">
+    <div class="no"><span class="ru">Кейс</span><span class="en">Case</span> 08</div>
+    <dl>
+      <div><dt><span class="ru">Где</span><span class="en">Where</span></dt><dd><span class="ru">Fortech · разработка и аутстаффинг</span><span class="en">Fortech · development and outstaffing</span></dd></div>
+      <div><dt><span class="ru">Клиент</span><span class="en">Client</span></dt><dd><span class="ru">зарубежные клиенты</span><span class="en">international clients</span></dd></div>
+      <div class="out"><dt><span class="ru">Итог</span><span class="en">Outcome</span></dt><dd><span class="ru">15+ партнёров, +180% валютных контрактов, срок выхода специалиста −60%</span><span class="en">15+ partners, +180% foreign-currency contracts, time to place −60%</span></dd></div>
+    </dl>
+  </aside>
+  <div class="body">
+    <div class="vec"><span class="vt main"><span class="ru">Новые клиенты</span><span class="en">New business</span></span><span class="vt"><span class="ru">Апселл</span><span class="en">Upsell</span></span><span class="vt">Ownership</span></div>
+    <h3><span class="ru">Запустила зарубежное направление продаж с нуля</span><span class="en">Launched the international sales line from scratch</span></h3>
+    <section><h4><span class="ru">Ситуация</span><span class="en">Situation</span></h4><p><span class="ru">У IT-компании не было зарубежного направления и готовых лидов от маркетинга. Клиентов нужно было найти самой.</span><span class="en">The IT company had no international line and no marketing leads. I had to find clients myself.</span></p></section>
+    <div class="two">
+      <section><h4><span class="ru">Что я сделала</span><span class="en">What I did</span></h4><ol class="acts"><li><span class="ru">Сформировала базу, сегментировала рынок и выходила на ЛПР напрямую.</span><span class="en">Built the prospect base, segmented the market and reached decision-makers directly.</span></li><li><span class="ru">Разобрала путь от запроса клиента до выхода специалиста — запрос, профили, интервью, выход — и сократила каждый этап.</span><span class="en">Mapped the path from a client's request to a specialist's start (request, profiles, interview, start) and shortened each step.</span></li><li><span class="ru">Расширяла команды на действующих проектах.</span><span class="en">Grew teams on existing projects.</span></li></ol></section>
+      <section class="resbox"><h4><span class="ru">Результат</span><span class="en">Result</span></h4><ul class="res"><li><span class="ru">Срок выхода специалиста на зарубежный проект сократился <b>более чем на 60%</b>.</span><span class="en">Time to place a specialist on a foreign project fell <b>by more than 60%</b>.</span></li><li><span class="ru"><b>15+ партнёров</b> из РФ, Эстонии, Польши и США.</span><span class="en"><b>15+ partners</b> in Russia, Estonia, Poland and the US.</span></li><li><span class="ru">Доля валютных контрактов выросла <b>на 180%</b>.</span><span class="en">The share of foreign-currency contracts grew <b>by 180%</b>.</span></li></ul></section>
+    </div>
+    <p class="take"><span class="tl"><span class="ru">Вывод</span><span class="en">Takeaway</span></span><span class="tk"><span class="ru">Клиент выбирает того, кто первым пришёл с подходящим человеком.</span><span class="en">Clients choose whoever brings the right person first.</span></span></p>
+  </div>
+</article>
+<article class="case" id="c09" data-tags="failure negotiation">
+  <aside class="facts">
+    <div class="no"><span class="ru">Кейс</span><span class="en">Case</span> 09</div>
+    <dl>
+      <div><dt><span class="ru">Где</span><span class="en">Where</span></dt><dd><span class="ru">Fortech · аутстаффинг</span><span class="en">Fortech · outstaffing</span></dd></div>
+      <div><dt><span class="ru">Клиент</span><span class="en">Client</span></dt><dd><span class="ru">клиент с запросом «срочно и недорого»</span><span class="en">an "urgent and cheap" client</span></dd></div>
+      <div class="out"><dt><span class="ru">Итог</span><span class="en">Outcome</span></dt><dd><span class="ru">оплачено всё, кроме 2 незаконченных фич; гайд по красным флагам стал регламентом</span><span class="en">paid in full except 2 unfinished features; the red-flag guide became policy</span></dd></div>
+    </dl>
+  </aside>
+  <div class="body">
+    <div class="vec"><span class="vt main"><span class="ru">Факап</span><span class="en">Failure</span></span><span class="vt"><span class="ru">Переговоры</span><span class="en">Negotiation</span></span></div>
+    <h3><span class="ru">Защитила оплату по проблемному проекту и ввела регламент по красным флагам клиента</span><span class="en">Protected payment on a troubled project and introduced a client red-flag policy</span></h3>
+    <section><h4><span class="ru">Ситуация</span><span class="en">Situation</span></h4><p><span class="ru">Клиент пришёл с запросом «срочно и недорого», на первом звонке сбивал ставку и торговался. Я предупредила РОПа и руководителя аутстаффинга о рисках, но руководство решило начать работу. Разработчик вышел без онбординга в код, заказчик постоянно менял требования, а его разработчики срывали сроки и тормозили нашего специалиста. В итоге клиент потребовал скидку.</span><span class="en">The client wanted a developer "urgently and cheaply" and pushed on price from the first call. I warned the head of sales and the head of outstaffing about the risks, but management decided to go ahead. Our developer started with no onboarding, the client kept changing requirements, and their developers missed deadlines that blocked ours. Then the client demanded a discount.</span></p></section>
+    <div class="two">
+      <section><h4><span class="ru">Что я сделала</span><span class="en">What I did</span></h4><ol class="acts"><li><span class="ru">Собрала звонок с техническим руководителем и разработчиком: оценили, насколько критичны изменения ТЗ и задержки.</span><span class="en">Set up a call with our tech lead and the developer to assess the impact of scope changes and delays.</span></li><li><span class="ru">Подключила тимлида направления на помощь разработчику.</span><span class="en">Brought in a team lead to support the developer.</span></li><li><span class="ru">Выходила к заказчику с техническим обоснованием сроков, а затем — вместе с техническим руководителем.</span><span class="en">Went to the client with technical reasoning on timelines, and later together with our tech lead.</span></li><li><span class="ru">Разделила задачи на сделанные, частично сделанные и не сделанные и по этому списку согласовала оплату.</span><span class="en">Split tasks into done, partly done and not done, and agreed payment on that list.</span></li></ol></section>
+      <section class="resbox"><h4><span class="ru">Результат</span><span class="en">Result</span></h4><ul class="res"><li><span class="ru">Оплачено всё, <b>кроме двух незаконченных фич</b>.</span><span class="en">Everything was paid <b>except two unfinished features</b>.</span></li><li><span class="ru">Компания прекратила сотрудничество с клиентом.</span><span class="en">The company ended the relationship with the client.</span></li><li><span class="ru">Мой гайд по красным и жёлтым флагам заказчика согласовали все руководители, он стал регламентом.</span><span class="en">My red and yellow client flags guide was approved by all managers and became policy.</span></li></ul></section>
+    </div>
+    <p class="take"><span class="tl"><span class="ru">Вывод</span><span class="en">Takeaway</span></span><span class="tk"><span class="ru">Предчувствие становится аргументом, когда его переводишь в критерии. И иногда клиенту нужно говорить «нет».</span><span class="en">A gut feeling becomes an argument once you turn it into criteria. And sometimes the answer to a client is no.</span></span></p>
+  </div>
+</article>
+  </div>
+</section>
+
 <section class="sec" id="portfolio">
   <div class="gut">
     <h2><span class="ru">Портфолио: живые примеры</span><span class="en">Portfolio: live examples</span></h2>
@@ -349,13 +584,6 @@ footer .gut { display: flex; flex-wrap: wrap; gap: 6px 20px; justify-content: sp
   </div>
 </section>
 
-<section class="cta">
-  <div class="gut">
-    <p><span class="ru">Как именно я удерживаю клиентов, делаю апселл и вытаскиваю сложные проекты — девять историй с цифрами.</span><span class="en">How exactly I retain clients, upsell and rescue hard projects — nine stories with numbers.</span></p>
-    <a href="https://gonesha.github.io/cases/"><span class="ru">Смотреть кейсы ↗</span><span class="en">See case studies ↗</span></a>
-  </div>
-</section>
-
 <footer>
   <div class="gut"><span><span class="ru">Анна Каленикова · Customer Success Manager / Account Director</span><span class="en">Anna Kalenikova · Customer Success Manager / Account Director</span></span><span>Telegram @turmericbitte · baannabaeva@gmail.com · <span class="ru">рекомендации по запросу</span><span class="en">references on request</span></span></div>
 </footer>
@@ -368,6 +596,7 @@ footer .gut { display: flex; flex-wrap: wrap; gap: 6px 20px; justify-content: sp
     root.lang = l;
     document.querySelectorAll('.lang button').forEach(function (b) { b.setAttribute('aria-pressed', String(b.dataset.l === l)); });
     try { localStorage.setItem('ak-cases-lang', l); } catch (e) {}
+    if (typeof renderCases === 'function') renderCases();
   }
   document.querySelectorAll('.lang button').forEach(function (b) { b.addEventListener('click', function () { setLang(b.dataset.l); }); });
   var tabs = document.querySelectorAll('.pf-tab');
@@ -384,6 +613,22 @@ footer .gut { display: flex; flex-wrap: wrap; gap: 6px 20px; justify-content: sp
     b.addEventListener('click', function () {
       document.querySelectorAll('.dev button').forEach(function (x) { x.setAttribute('aria-pressed', String(x === b)); });
       document.getElementById('mailFrame').classList.toggle('mobile', b.dataset.w === 'mob');
+    });
+  });
+  var cases = Array.prototype.slice.call(document.querySelectorAll('.case'));
+  var count = document.getElementById('count');
+  var current = 'all';
+  function renderCases() {
+    var n = 0;
+    cases.forEach(function (c) { var show = current === 'all' || c.dataset.tags.split(' ').indexOf(current) !== -1; c.hidden = !show; if (show) n++; });
+    var en = root.getAttribute('data-lang') === 'en';
+    count.textContent = en ? (n + ' of ' + cases.length + ' cases') : ('кейсов: ' + n + ' из ' + cases.length);
+  }
+  document.querySelectorAll('.flt').forEach(function (b) {
+    b.addEventListener('click', function () {
+      current = b.dataset.f;
+      document.querySelectorAll('.flt').forEach(function (x) { x.setAttribute('aria-pressed', String(x === b)); });
+      renderCases();
     });
   });
   var saved = null;
